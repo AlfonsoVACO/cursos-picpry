@@ -4,7 +4,11 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.codehard.miscursos.modelos.Plantel;
+import com.codehard.miscursos.services.PlantelServiceImp;
 
 public class MapToClass<T> {
 
@@ -95,11 +99,15 @@ public class MapToClass<T> {
 			throws IllegalArgumentException, IllegalAccessException {
 		switch (clase) {
 		case "Plantel":
-			GetInAllRepo<Plantel> plantel = new GetInAllRepo<>();
-			field.set(this.objClass, plantel.getClassById(id) );
+			//GetInAllRepo<Plantel> plantel = new GetInAllRepo<>();
+			field.set(this.objClass, plantelServiceImp.getPlantelById(id) );
 			break;
 		default:
 			break;
 		}
 	}
+	
+	@Autowired
+	@Qualifier("servicioPlantel")
+	private PlantelServiceImp plantelServiceImp;
 }
