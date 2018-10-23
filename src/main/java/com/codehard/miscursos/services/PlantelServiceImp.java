@@ -16,8 +16,11 @@ public class PlantelServiceImp {
 	@Qualifier("plantelRepository")
 	public PlantelReporitory plantelRepository;
 
-	public Optional<Plantel> getPlantelById(Integer id) {
-		return plantelRepository.findById(id);
+	public Plantel getPlantelById(Integer id) {
+		Optional<Plantel> lantel = plantelRepository.findById(id);
+		if(lantel.isPresent())
+			return lantel.get();
+		return new Plantel();
 	}
 
 	public List<Plantel> getPlantelAll() {

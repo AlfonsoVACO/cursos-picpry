@@ -100,10 +100,10 @@ public class MapToClass<T> {
 			throws IllegalArgumentException, IllegalAccessException {
 		switch (clase) {
 		case "Plantel":
-			Optional<Plantel> opcional = plantelServiceImp.getPlantelById(id);
-			if(opcional.isPresent()) {
-				System.out.println(opcional.get().toString());
-				field.set(this.objClass, opcional.get());
+			Plantel opcional = plantelServiceImp.getPlantelById(id);
+			if(!opcional.getIdplantel().equals(null)) {
+				System.out.println(opcional.toString());
+				field.set(this.objClass, opcional);
 			}else {
 				System.out.println("No encontré nada");
 			}
