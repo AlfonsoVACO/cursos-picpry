@@ -3,6 +3,7 @@ package com.codehard.miscursos.utils;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -99,8 +100,13 @@ public class MapToClass<T> {
 			throws IllegalArgumentException, IllegalAccessException {
 		switch (clase) {
 		case "Plantel":
-			//GetInAllRepo<Plantel> plantel = new GetInAllRepo<>();
-			field.set(this.objClass, plantelServiceImp.getPlantelById(id) );
+			Optional<Plantel> opcional = plantelServiceImp.getPlantelById(id);
+			if(opcional.isPresent()) {
+				System.out.println(opcional.get().toString());
+				field.set(this.objClass, opcional.get());
+			}else {
+				System.out.println("No encontré nada");
+			}
 			break;
 		default:
 			break;

@@ -30,10 +30,6 @@ public class PrincipalController {
 	@Qualifier("servicioPlantel")
 	public PlantelServiceImp plantelServiceImp;
 	
-	@Autowired
-	@Qualifier("plantelRepository")
-	public PlantelReporitory plantelRepository;
-	
 	@GetMapping("/")
     public String index(Model model) {
         return "alumno/index";
@@ -48,6 +44,7 @@ public class PrincipalController {
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {		
+		System.out.println(plantelServiceImp.getPlantelById(1).get());
 		MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
 		objAlumno.setConfiguration( lstproduct, "com.codehard.miscursos.modelos" );
 		
