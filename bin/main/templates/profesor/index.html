@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<title>Profesores</title>
+	<head th:replace="profesor/includes/header :: header"></head>
+    <body>        
+        <div class="wrapper">
+            <div th:replace="profesor/includes/menu :: menuslip"></div>
+            <div class="main-panel">
+                <nav th:replace="profesor/includes/menu :: navega"></nav>
+                <div class="content">
+                    <div class="container-fluid" id="menuResult">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Lista de reservaciones</h4>
+                                    </div>
+                                    <div class="content">
+                                        <div id='divreservacionlst'></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid"></div>
+                </footer>
+
+            </div>
+        </div>
+    </body>
+    <div class="modal fade modal-primary" id="Pedido" tabindex="-1" role="dialog" aria-labelledby="rancid">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="rancid">Pedido</h4>
+                </div>
+                <div id="pedidorancicrm"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-success" id="img-menu" tabindex="-1" role="dialog" aria-labelledby="formulariocrudmen">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="formulariocrudmen">Men&uacute;s</h4>
+                </div>
+                <div id="formulariocrud"></div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="profesor/includes/script :: scripts"></div>
+</html>

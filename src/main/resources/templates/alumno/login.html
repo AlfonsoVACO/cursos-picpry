@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>Iniciar sesión</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" th:href="@{/alumno/css/bootstrap4/bootstrap.min.css}">
+		<link th:href="@{/alumno/css/fontawesome/css/fontawesome-all.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" th:href="@{/alumno/scss/main-client.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/alumno/css/responsive.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/alumno/css/errores.css}">
+	</head>
+	<body>
+		<div class="login-page">
+			<div class="container">
+				<form class="form-login" th:action="@{/inlogin}" method="post">
+					<h2 class="form-login-heading">Bienvenido</h2>
+					<div class="login-img">
+						<img th:src="@{/alumno/img/if_user_925901.png}" alt="">
+					</div>
+					<div class="login-wrap">
+						<div class="form-group fadeInDown" data-wow-delay="0.5s">
+							<input type="email" id="stremail" style="display: inline;"
+								class="form-control-text" name="stremail" required /> <label
+								class="form-label" for="stremail"><span
+								class="form-label-content">Correo</span></label>
+						</div>
+						<div class="form-group fadeInDown" data-wow-delay="0.5s">
+							<input type="password" id="strpass" 
+								style="display: inline;" class="form-control-text"
+								name="strpass" required /> <label class="form-label"
+								for="strpass"><span class="form-label-content">Contraseña</span></label>
+						</div>
+						<div class="otras-opciones">
+							<div class="item-btn">
+								<input class="btn btn-info btn-block" type="submit" value="Iniciar sesión" />
+							</div>
+							<div class="item-btn">
+								<input class="btn btn-info btn-block" data-toggle="modal" data-target='#registro' type="button" value="Registrarse" />
+							</div>
+						</div>
+						<div th:if="${#request.getParameter('error') == 'true'}" style="color:red;margin:10px 0px;">
+							No se pudo iniciar sesión<br />
+							Causa :
+							<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}" 
+							th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="modal fade modal-danger" id="registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title"></h4>
+					</div>
+					<div class="modal-body" role="main">
+						<table align="center" class="table">
+							<tr valign="baseline" class="valid-errors">
+								<td>
+									<form class="form">
+										<div class="panel panel-default">
+											<div class="panel-body">
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="text" id="strnombre" style="display: inline;" class="form-control-text" name="strnombre" required />
+													<label class="form-label" for="strnombre"><span class="form-label-content">* Nombre</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="text" id="strapellidos"  style="display: inline;" class="form-control-text" name="strapellidos" required />
+													<label class="form-label" for="strapellidos"><span class="form-label-content">* Apellidos</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="tel" id="strtelefono" maxlength="10" pattern="/d*" style="display: inline;" class="form-control-text" name="strtelefono" required />
+													<label class="form-label" for="strtelefono"><span class="form-label-content">Teléfono</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="text" id="strdireccion" style="display: inline;" class="form-control-text" name="strdireccion" required />
+													<label class="form-label" for="strdireccion"><span class="form-label-content">* Dirección</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="text" id="strcp" maxlength="5" pattern="/d*" style="display: inline;" class="form-control-text" name="strcp" required />
+													<label class="form-label" for="strcp"><span class="form-label-content">* CP</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="email" id="strcorreo" style="display: inline;" class="form-control-text" name="strcorreo" required />
+													<label class="form-label" for="strcorreo"><span class="form-label-content">* Correo</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="password" id="strpassword" style="display: inline;" class="form-control-text" name="strpassword" required />
+													<label class="form-label" for="strpassword"><span class="form-label-content">* Contraseña</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<input type="password" id="strpasswordr"  style="display: inline;" class="form-control-text" name="strpasswordr" required />
+													<label class="form-label" for="strpasswordr"><span class="form-label-content">* Confirma contraseña</span></label>
+												</div>
+												<div class="form-group fadeInDown" data-wow-delay="0.5s">
+													<select class="form-control-text" id="stridplantel" style="display: inline;" name="stridplantel">
+													<option th:each="plantel : ${lstplanteles}" 
+                        th:value="${plantel.idplantel}" th:text="${plantel.nombre + ' => '+ plantel.direccion}">Opción</option>
+													</select>
+													<label class="form-label" for="stridplantel"><span class="form-label-content">Plantel</span></label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<input type="button" id="register-al" 
+											onclick="sendData(this);" 
+											data-onclear="true" 
+											data-onsend='["register-al","strpasswordr"]'
+											data-onvalid='["register-al","strtelefono"]'  
+											data-href-method="post"
+											data-list-str="stridplantel" 
+											data-remain="3"
+											data-href-url="/register" class="btn btn-primary align-right" value="Registrarse"/>
+										</div>
+									</form>
+									<div id="mensaje"></div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/alumno/js/jquery-3.2.1.min.js}"></script>
+		<script th:src="@{/alumno/css/bootstrap4/popper.js}"></script>
+		<script th:src="@{/alumno/css/bootstrap4/bootstrap.min.js}"></script>
+		<script th:src="@{/alumno/scrollmagic/ScrollMagic.min.js}"></script>
+		<script type="text/javascript" th:src="@{/generales/requester/Validacion.js}"></script>
+		<script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<title>Inicio</title>
+	<meta charset="utf-8">
+	<head th:replace="alumno/includes/heads :: header"></head>
+	<link rel="stylesheet" type="text/css" th:href="@{/alumno/css/errores.css}">
+	<body>
+		<div class="container-pz">
+			<header th:replace="alumno/includes/header :: header-menu"></header>
+			<div th:replace="alumno/includes/header :: header-movil"></div>
+			<div class="home">
+				<div class="hero_slider_container">
+					<div class="hero_slider owl-carousel">
+						<div class="hero_slide">
+							<div class="hero_slide_background" style="background-image:url(https://www.academiadeinternet.com.mx/assets/img/slider/slide1.jpg)"></div>
+						</div>
+						<div class="hero_slide">
+							<div class="hero_slide_background" style="background-image:url(https://i2.wp.com/alianzafrancesapanama.com/wp-content/uploads/2017/05/SLIDE-PAGE-WEB-CURSOS-2018.jpg)"></div>
+						</div>
+						<div class="hero_slide">
+							<div class="hero_slide_background" style="background-image:url(http://s1.1zoom.me/big0/259/Destiny_Online_Warlock_461204.jpg)"></div>
+							<div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+								<div class="hero_slide_content text-center">
+									<h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Hola <span>Alfonso</span> </h1>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200"><i class="fas fa-angle-left"></i></span></div>
+					<div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200"><i class="fas fa-angle-right"></i></span></div>
+				</div>
+
+			</div>
+
+			<div class="section" id="cursos">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-title">
+								<h3 class="title">Nuevos cursos</h3>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="row">
+											<div class="curso col-md-3">
+												<div class="curso-img">
+													<img src="https://i.ytimg.com/vi/wmwQSO0Fx9E/maxresdefault.jpg" alt="">
+												</div>
+												<div class="curso-body">
+													<p class="curso-profesor">{{ Nombre profesor }}</p>
+													<h3 class="curso-nombre"><a href="#">{{ Nombre curso }}</a></h3>
+													<h4 class="curso-precio">${{ Precio }}</h4>
+													<div class="curso-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button class="add-to-cart-btn"  data-cart-add="1"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</div>
+											</div>
+											<div class="curso col-md-3">
+												<div class="curso-img">
+													<img src="https://i.ytimg.com/vi/wmwQSO0Fx9E/maxresdefault.jpg" alt="">
+												</div>
+												<div class="curso-body">
+													<p class="curso-profesor">{{ Nombre profesor }}</p>
+													<h3 class="curso-nombre"><a href="#">{{ Nombre curso }}</a></h3>
+													<h4 class="curso-precio">${{ Precio }}</h4>
+													<div class="curso-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button class="add-to-cart-btn"  data-cart-add="2"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</div>
+											</div>
+											<div class="curso col-md-3">
+												<div class="curso-img">
+													<img src="https://i.ytimg.com/vi/wmwQSO0Fx9E/maxresdefault.jpg" alt="">
+												</div>
+												<div class="curso-body">
+													<p class="curso-profesor">{{ Nombre profesor }}</p>
+													<h3 class="curso-nombre"><a href="#">{{ Nombre curso }}</a></h3>
+													<h4 class="curso-precio">${{ Precio }}</h4>
+													<div class="curso-rating">
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button class="add-to-cart-btn"  data-cart-add="3"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</div>
+											</div>
+											<div class="curso col-md-3">
+												<div class="curso-img">
+													<img src="https://i.ytimg.com/vi/wmwQSO0Fx9E/maxresdefault.jpg" alt="">
+												</div>
+												<div class="curso-body">
+													<p class="curso-profesor">{{ Nombre profesor }}</p>
+													<h3 class="curso-nombre"><a href="#">{{ Nombre curso }}</a></h3>
+													<h4 class="curso-precio">${{ Precio }}</h4>
+													<div class="curso-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button class="add-to-cart-btn"  data-cart-add="4"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</div>
+											</div>
+											<div class="curso col-md-3">
+												<div class="curso-img">
+													<img src="https://i.ytimg.com/vi/wmwQSO0Fx9E/maxresdefault.jpg" alt="">
+												</div>
+												<div class="curso-body">
+													<p class="curso-profesor">{{ Nombre profesor }}</p>
+													<h3 class="curso-nombre tit"><a href="#">{{ Nombre curso }}</a></h3>
+													<h4 class="curso-precio">${{ Precio }}</h4>
+													<div class="curso-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button id="btn" class="add-to-cart-btn js-open is-active"  data-cart-add="5" data-modal="modal-cart"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</div>
+											</div>
+										</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			<footer id="footer">
+				<div id="bottom-footer" class="section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<span class="copyright">
+									Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<button title="Back to top" class="scroll">
+        		<span class="arrow-up fas fa-angle-up"></span>
+    		</button>
+		</div>
+		<div id="modal-cart"></div>
+		<div th:replace="alumno/includes/script :: scripts"></div>
+		<script th:src="@{/alumno/js/funtions.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<title>Inicio</title>
+	<head th:replace="administrador/includes/head :: header"></head>
+	<body class="animsition" onload="getItemOnLoad();">
+		<div class="page-wrapper">
+	      <header th:replace="administrador/includes/menu :: header-movile"></header>
+	      <aside th:replace="administrador/includes/menu :: asside"></aside>
+	      <div class="page-container">
+	        <header th:replace="administrador/includes/menu :: header-desktop"></header>
+	        <div class="main-content"></div>
+	      </div>
+	    </div>
+	    <div th:replace="administrador/includes/script :: scripts"></div>
+	</body>
+</html>

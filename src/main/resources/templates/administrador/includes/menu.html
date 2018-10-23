@@ -1,0 +1,150 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<header class="header-mobile d-block d-lg-none" th:fragment="header-movile">
+		<div class="header-mobile__bar">
+			<div class="container-fluid">
+				<div class="header-mobile-inner">
+					<a class="logo" href="./">
+						<img th:src="@{/administrador/images/icon/logo.png}"/>
+					</a>
+					<button class="hamburger hamburger--slider" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+        <nav class="navbar-mobile">
+        	<div class="container-fluid">
+	            <ul class="navbar-mobile__list list-unstyled">
+	            	<li>
+		                <span data-href="Index" onclick="getItem(this);" data-href-to-menu="Index"  data-href-to-view="/admin/">
+		                	<i class="fas fa-cogs"></i>Administradores
+		                </span>
+		            </li>
+		            <li>
+		                <span data-href="Pagos" onclick="getItem(this);" data-href-to-menu="Pagos"  data-href-to-view="/admin/pagos/">
+		                	<i class="fa fa-credit-card"></i>Pagos
+		                </span>
+	              	</li>
+	              	<li>
+		                <span data-href="Estudiantes" onclick="getItem(this);" data-href-to-menu="Estudiantes"  data-href-to-view="/admin/estudiantes">
+		                  	<i class="fa fa-graduation-cap"></i>Estudiantes
+		                </span>
+	              	</li>
+	              	<li>
+		                <span data-href="Profesores" onclick="getItem(this);" data-href-to-menu="Profesores"  data-href-to-view="/admin/profesores/">
+		                  	<i class="fa fa-users"></i>Profesores
+		                </span>
+	              	</li>
+	              	<li>
+		                <span data-href="Planteles" onclick="getItem(this);" data-href-to-menu="Platica"  data-href-to-view="/admin/planteles/">
+		                  	<i class="fa fa-podcast"></i>Planteles
+		                </span>
+	              	</li>
+	              	<li>
+		                <span data-href="Cursos" onclick="getItem(this);" data-href-to-menu="Cursos"  data-href-to-view="/admin/cursos">
+		                  	<i class="fa fa-laptop"></i>Cursos
+		                </span>
+	              	</li>
+	            </ul>
+            </div>
+		</nav>
+	</header>
+	<aside class="menu-sidebar d-none d-lg-block" th:fragment="asside">
+		<div class="logo">
+          <a href="#">
+            <img th:src="@{/administrador/images/icon/logo.png}" />
+          </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+          <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list change-menu">
+              <li class="active">
+                <span data-href="Index" onclick="getItem(this);" data-href-to-menu="Index"  data-href-to-view="/admin/">
+                  <i class="fas fa-cogs"></i>Administradores
+                </span>
+              </li>
+              <li>
+                <span data-href="Pagos" onclick="getItem(this);" data-href-to-menu="Pagos"  data-href-to-view="/admin/pagos/">
+                  <i class="fa fa-credit-card"></i>Pagos
+                </span>
+              </li>
+              <li>
+                <span data-href="Estudiantes" onclick="getItem(this);" data-href-to-menu="Estudiantes"  data-href-to-view="/admin/estudiantes/">
+                  <i class="fa fa-graduation-cap"></i>Estudiantes
+                </span>
+              </li>
+              <li>
+                <span data-href="Profesores" onclick="getItem(this);" data-href-to-menu="Profesores"  data-href-to-view="/admin/profesores/">
+                  <i class="fa fa-users"></i>Profesores
+                </span>
+              </li>
+              <li>
+                <span data-href="Planteles" onclick="getItem(this);" data-href-to-menu="Platica"  data-href-to-view="/admin/planteles/">
+                  <i class="fa fa-podcast"></i>Planteles
+                </span>
+              </li>
+              <li>
+                <span data-href="Cursos" onclick="getItem(this);" data-href-to-menu="Cursos"  data-href-to-view="/admin/cursos/">
+                  <i class="fa fa-laptop"></i>Cursos
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+	</aside>
+	
+	<header  th:fragment="header-desktop" class="header-desktop">
+		<div class="section__content section__content--p30">
+			<div class="container-fluid">
+				<div class="header-wrap">
+					<div class="header-button">
+                  		<div class="account-wrap">
+                    		<div class="account-item clearfix js-item-menu">
+                      			<div class="image">
+                        			<img th:src="@{/administrador/images/icon/avatar-01.jpg}" />
+                      			</div>
+                      			<div class="content">
+                        			<a class="js-acc-btn" href="#">{{ Nombre admin }}</a>
+                      			</div>
+                      			<div class="account-dropdown js-dropdown">
+                        			<div class="info clearfix">
+                          				<div class="image">
+                            				<a href="#">
+                              					<img th:src="@{/administrador/images/icon/avatar-01.jpg}"/>
+                            				</a>
+                          				</div>
+                          				<div class="content">
+                            				<h5 class="name">
+                              					<a href="#">{{ Nombre admin }}</a>
+                            				</h5>
+                            				<span class="email">{{ correo@example.com }}</span>
+                          				</div>
+                        			</div>
+                        			<div class="account-dropdown__body">
+                          				<div class="account-dropdown__item">
+                            				<span data-href="Perfil" onclick="getItem(this);" data-href-to-menu="Perfil"  data-href-to-view="/admin/perfil/">
+                              					<i class="zmdi zmdi-account"></i>Mi cuenta
+                            				</span>
+                          				</div>
+                          				<div class="account-dropdown__item">
+                            				<span data-href="Config" onclick="getItem(this);" data-href-to-menu="Config"  data-href-to-view="/admin/config/">
+                              					<i class="zmdi zmdi-settings"></i>Configuraci&oacute;n global
+                            				</span>
+                          				</div>
+                        			</div>
+                        			<div class="account-dropdown__footer">
+                          				<a th:href="@{/logout}">
+                            				<i class="zmdi zmdi-power"></i>Cerrar sesi&oacute;n
+                          				</a>
+                        			</div>
+                      			</div>
+                    		</div>
+                  		</div>
+                	</div>
+              	</div>
+            </div>
+		</div>
+	</header>
+</html>

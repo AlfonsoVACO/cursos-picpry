@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="sidebar" data-color="purple" th:fragment="menuslip" th:data-image="@{/profesor/img/fondo.jpg}">
+		<div class="sidebar-wrapper">
+			<div class="logo">
+				<a th:href="@{/profes/}" class="simple-text" th:text="${user}">Nombre profesor</a>
+			</div>	
+			<ul class="nav">
+				<li>
+					<a href="/profes/">
+						<i class="pe-7s-graph"></i>
+						<p>Reservaciones</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('ReservacionesH');">
+						<i class="pe-7s-news-paper"></i>
+						<p>Reservaciones hechas</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('Perfil');">
+						<i class="pe-7s-user"></i>
+						<p>Perfil</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('Galeria');">
+						<i class="pe-7s-science"></i>
+						<p>Galer&iacute;a</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('Registros');">
+						<i class="pe-7s-map-marker"></i>
+						<p>Registros</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('Comentarios');">
+						<i class="pe-7s-bell"></i>
+						<p>Comentarios</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript: getItem('Clientes');">
+						<i class="pe-7s-user"></i>
+						<p>Mis clientes</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<nav class="navbar navbar-default navbar-fixed" th:fragment="navega"> 
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#navigation-example-2">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" id="nombre_negini" th:href="@{/profes/}"></a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li class="dropdown"><a
+						href="javascript: getItem('Comentarios');"> <i
+							class="fa fa-mail"></i>
+					</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"> Mi negocio <b class="caret"></b>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript: getItem('AjusteNegoci');">Cambiar
+									datos</a></li>
+						</ul></li>
+					<li><a th:href="@{/logout}"> Salir </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</html>
