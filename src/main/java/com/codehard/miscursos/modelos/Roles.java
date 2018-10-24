@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "roles", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -35,10 +37,13 @@ public class Roles implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrol")
+    @JsonManagedReference
     private List<Administrador> administradorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrol")
+    @JsonManagedReference
     private List<Alumno> alumnoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrol")
+    @JsonManagedReference
     private List<Profesor> profesorList;
 
     public Roles() {
@@ -147,8 +152,7 @@ public class Roles implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Roles [idrol=" + idrol + ", descripcion=" + descripcion + ", administradorList=" + administradorList
-				+ ", alumnoList=" + alumnoList + ", profesorList=" + profesorList + "]";
+		return "Roles [idrol=" + idrol + ", descripcion=" + descripcion +  "]";
 	}
 
 

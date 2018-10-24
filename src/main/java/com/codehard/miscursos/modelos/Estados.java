@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "estados", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -35,8 +37,10 @@ public class Estados implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestado")
+    @JsonManagedReference
     private List<Plantel> plantelList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestado")
+    @JsonManagedReference
     private List<Alumno> alumnoList;
 
     public Estados() {
@@ -130,8 +134,7 @@ public class Estados implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Estados [idestado=" + idestado + ", nombre=" + nombre + ", plantelList=" + plantelList + ", alumnoList="
-				+ alumnoList + "]";
+		return "Estados [idestado=" + idestado + ", nombre=" + nombre + "]";
 	}
 
     

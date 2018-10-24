@@ -23,6 +23,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "profesor", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -74,12 +77,15 @@ public class Profesor implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecharegistro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")
+    @JsonManagedReference
     private List<CursoProfesor> cursoProfesorList;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Roles idrol;
 
     public Profesor() {
@@ -298,9 +304,8 @@ public class Profesor implements Serializable {
 	public String toString() {
 		return "Profesor [idprofesor=" + idprofesor + ", clave=" + clave + ", nombre=" + nombre + ", apellidos="
 				+ apellidos + ", correo=" + correo + ", password=" + password + ", actualiza="
-				+ Arrays.toString(actualiza) + ", eliminar=" + Arrays.toString(eliminar) + ", img="
-				+ Arrays.toString(img) + ", fecharegistro=" + fecharegistro + ", cursoProfesorList=" + cursoProfesorList
-				+ ", idadmin=" + idadmin + ", idrol=" + idrol + "]";
+				+ Arrays.toString(actualiza) + ", eliminar=" + Arrays.toString(eliminar) +
+				", fecharegistro=" + fecharegistro +  "]";
 	}
 
 

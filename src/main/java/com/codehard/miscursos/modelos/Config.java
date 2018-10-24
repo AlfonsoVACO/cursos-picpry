@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "config", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -39,9 +41,11 @@ public class Config implements Serializable {
     private String otro;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Plantel idplantel;
 
     public Config() {
@@ -164,7 +168,7 @@ public class Config implements Serializable {
 	@Override
 	public String toString() {
 		return "Config [idconfig=" + idconfig + ", color=" + color + ", tipoletra=" + tipoletra + ", otro=" + otro
-				+ ", idadmin=" + idadmin + ", idplantel=" + idplantel + "]";
+				+ "]";
 	}
 
     

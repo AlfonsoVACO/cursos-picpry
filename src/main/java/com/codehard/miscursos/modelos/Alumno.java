@@ -20,6 +20,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "alumno", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -75,26 +78,35 @@ public class Alumno implements Serializable {
     @Column(name = "keydes")
     private String keydes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    @JsonManagedReference
     private List<Calificacion> calificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    @JsonManagedReference
     private List<Asistencia> asistenciaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    @JsonManagedReference
     private List<Comentarios> comentariosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    @JsonManagedReference
     private List<Resetopass> resetopassList;
     @JoinColumn(name = "idestado", referencedColumnName = "idestado")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Estados idestado;
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Municipios idmunicipio;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Plantel idplantel;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Roles idrol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    @JsonManagedReference
     private List<Pagos> pagosList;
 
     public Alumno() {
@@ -436,10 +448,7 @@ public class Alumno implements Serializable {
 		return "Alumno [idalumno=" + idalumno + ", matricula=" + matricula + ", nombre=" + nombre + ", apellidos="
 				+ apellidos + ", telefono=" + telefono + ", direccion=" + direccion + ", cp=" + cp + ", img=" + img
 				+ ", correo=" + correo + ", password=" + password + ", estado=" + Arrays.toString(estado) + ", keydes="
-				+ keydes + ", calificacionList=" + calificacionList + ", asistenciaList=" + asistenciaList
-				+ ", comentariosList=" + comentariosList + ", resetopassList=" + resetopassList + ", idestado="
-				+ idestado + ", idmunicipio=" + idmunicipio + ", idplantel=" + idplantel + ", idrol=" + idrol
-				+ ", pagosList=" + pagosList + "]";
+				+ keydes +  "]";
 	}
 
 

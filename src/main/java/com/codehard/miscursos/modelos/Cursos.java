@@ -21,6 +21,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "cursos", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -74,29 +77,40 @@ public class Cursos implements Serializable {
     private byte[] estado;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Categoria idcategoria;
     @JoinColumn(name = "idhorario", referencedColumnName = "idhorario")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Horario idhorario;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Plantel idplantel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Calificacion> calificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<CursoProfesor> cursoProfesorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Asistencia> asistenciaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Temas> temasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Comentarios> comentariosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Pagos> pagosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
+    @JsonManagedReference
     private List<Libros> librosList;
 
     public Cursos() {
@@ -434,11 +448,8 @@ public class Cursos implements Serializable {
 	public String toString() {
 		return "Cursos [idcurso=" + idcurso + ", clave=" + clave + ", nombre=" + nombre + ", cupo=" + cupo
 				+ ", cupotemp=" + cupotemp + ", descripcioncorta=" + descripcioncorta + ", descripcionlarga="
-				+ descripcionlarga + ", costo=" + costo + ", img=" + img + ", estado=" + Arrays.toString(estado)
-				+ ", idadmin=" + idadmin + ", idcategoria=" + idcategoria + ", idhorario=" + idhorario + ", idplantel="
-				+ idplantel + ", calificacionList=" + calificacionList + ", cursoProfesorList=" + cursoProfesorList
-				+ ", asistenciaList=" + asistenciaList + ", temasList=" + temasList + ", comentariosList="
-				+ comentariosList + ", pagosList=" + pagosList + ", librosList=" + librosList + "]";
+				+ descripcionlarga + ", costo=" + costo + ", estado=" + Arrays.toString(estado)
+				+  "]";
 	}
 
     

@@ -101,7 +101,7 @@ public class Videos implements Serializable {
 	@Override
 	public String toString() {
 		return "Videos [idvideo=" + idvideo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", url=" + url
-				+ ", idtema=" + idtema + "]";
+				+ "]";
 	}
 
 	@Override

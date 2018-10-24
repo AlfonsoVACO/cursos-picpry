@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "horario", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -48,6 +50,7 @@ public class Horario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idhorario")
+    @JsonManagedReference
     private List<Cursos> cursosList;
 
     public Horario() {
@@ -157,7 +160,7 @@ public class Horario implements Serializable {
 	@Override
 	public String toString() {
 		return "Horario [idhorario=" + idhorario + ", descripcion=" + descripcion + ", fechade=" + fechade + ", fechaa="
-				+ fechaa + ", cursosList=" + cursosList + "]";
+				+ fechaa + "]";
 	}
 
     

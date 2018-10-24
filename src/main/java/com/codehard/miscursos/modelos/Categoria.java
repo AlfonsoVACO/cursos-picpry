@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "categoria", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -35,6 +37,7 @@ public class Categoria implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcategoria")
+    @JsonManagedReference
     private List<Cursos> cursosList;
 
     public Categoria() {
@@ -113,7 +116,7 @@ public class Categoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", cursosList=" + cursosList + "]";
+		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre +"]";
 	}
 
     

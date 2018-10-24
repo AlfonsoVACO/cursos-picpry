@@ -1,11 +1,13 @@
 package com.codehard.miscursos.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codehard.miscursos.modelos.Alumno;
+import com.codehard.miscursos.modelos.Plantel;
 import com.codehard.miscursos.repositories.PlantelReporitory;
 import com.codehard.miscursos.services.PlantelServiceImp;
 import com.codehard.miscursos.utils.MapToClass;
@@ -30,6 +33,10 @@ public class PrincipalController {
 	@Qualifier("servicioPlantel")
 	public PlantelServiceImp plantelServiceImp;
 	
+	@Autowired
+	@Qualifier("plantelRepository")
+	public PlantelReporitory plantelRepository;
+	
 	@GetMapping("/")
     public String index(Model model) {
         return "alumno/index";
@@ -41,14 +48,18 @@ public class PrincipalController {
         return "alumno/login";
     }
 	
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {		
-		System.out.println(plantelServiceImp.getPlantelById(1).toString());
-		/*MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
-		objAlumno.setConfiguration( lstproduct, "com.codehard.miscursos.modelos" );
+		MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
 		
-		System.out.println(objAlumno.getClassMap().toString());*/
+		Map<Object, JpaRepository> mapasRepo = new HashMap<>();
+		mapasRepo.put(new Plantel(), plantelRepository);
+		
+		objAlumno.setConfiguration( lstproduct, mapasRepo, "com.codehard.miscursos.modelos" );
+		
+		System.out.println(objAlumno.getClassMap());
 		
         return new Alumno();
     }

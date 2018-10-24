@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "contacto", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -59,6 +61,7 @@ public class Contacto implements Serializable {
     private int estado;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Plantel idplantel;
 
     public Contacto() {
@@ -209,7 +212,7 @@ public class Contacto implements Serializable {
 	@Override
 	public String toString() {
 		return "Contacto [idcontacto=" + idcontacto + ", nombre=" + nombre + ", correo=" + correo + ", motivo=" + motivo
-				+ ", mensaje=" + mensaje + ", fecha=" + fecha + ", estado=" + estado + ", idplantel=" + idplantel + "]";
+				+ ", mensaje=" + mensaje + ", fecha=" + fecha + ", estado=" + estado + "]";
 	}
 
     
