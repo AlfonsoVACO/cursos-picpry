@@ -45,10 +45,10 @@ public class PrincipalController {
 	@ResponseBody
 	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {		
 		System.out.println(plantelServiceImp.getPlantelById(1).toString());
-		MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
+		/*MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
 		objAlumno.setConfiguration( lstproduct, "com.codehard.miscursos.modelos" );
 		
-		System.out.println(objAlumno.getClassMap().toString());
+		System.out.println(objAlumno.getClassMap().toString());*/
 		
         return new Alumno();
     }

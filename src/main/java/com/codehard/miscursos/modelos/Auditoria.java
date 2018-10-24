@@ -102,24 +102,54 @@ public class Auditoria implements Serializable {
         this.fecharegistro = fecharegistro;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idaudita != null ? idaudita.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accion == null) ? 0 : accion.hashCode());
+		result = prime * result + ((fecharegistro == null) ? 0 : fecharegistro.hashCode());
+		result = prime * result + ((idaudita == null) ? 0 : idaudita.hashCode());
+		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+		result = prime * result + ((tabla == null) ? 0 : tabla.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Auditoria)) {
-            return false;
-        }
-        Auditoria other = (Auditoria) object;
-        if ((this.idaudita == null && other.idaudita != null) || (this.idaudita != null && !this.idaudita.equals(other.idaudita))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Auditoria other = (Auditoria) obj;
+		if (accion == null) {
+			if (other.accion != null)
+				return false;
+		} else if (!accion.equals(other.accion))
+			return false;
+		if (fecharegistro == null) {
+			if (other.fecharegistro != null)
+				return false;
+		} else if (!fecharegistro.equals(other.fecharegistro))
+			return false;
+		if (idaudita == null) {
+			if (other.idaudita != null)
+				return false;
+		} else if (!idaudita.equals(other.idaudita))
+			return false;
+		if (ip == null) {
+			if (other.ip != null)
+				return false;
+		} else if (!ip.equals(other.ip))
+			return false;
+		if (tabla == null) {
+			if (other.tabla != null)
+				return false;
+		} else if (!tabla.equals(other.tabla))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -127,6 +157,5 @@ public class Auditoria implements Serializable {
 				+ ", fecharegistro=" + fecharegistro + "]";
 	}
 
-    
     
 }

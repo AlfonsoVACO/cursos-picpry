@@ -66,25 +66,47 @@ public class CursoProfesor implements Serializable {
         this.idprofesor = idprofesor;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idprofesor == null) ? 0 : idprofesor.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof CursoProfesor)) {
-            return false;
-        }
-        CursoProfesor other = (CursoProfesor) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CursoProfesor other = (CursoProfesor) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		if (idprofesor == null) {
+			if (other.idprofesor != null)
+				return false;
+		} else if (!idprofesor.equals(other.idprofesor))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "CursoProfesor [id=" + id + ", idcurso=" + idcurso + ", idprofesor=" + idprofesor + "]";
 	}
+
     
 }

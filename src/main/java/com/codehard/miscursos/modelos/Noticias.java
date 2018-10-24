@@ -114,26 +114,66 @@ public class Noticias implements Serializable {
         this.idplantel = idplantel;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idnoticia != null ? idnoticia.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idnoticia == null) ? 0 : idnoticia.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Noticias)) {
-            return false;
-        }
-        Noticias other = (Noticias) object;
-        return !((this.idnoticia == null && other.idnoticia != null) || (this.idnoticia != null && !this.idnoticia.equals(other.idnoticia)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Noticias other = (Noticias) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idnoticia == null) {
+			if (other.idnoticia != null)
+				return false;
+		} else if (!idnoticia.equals(other.idnoticia))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Noticias [idnoticia=" + idnoticia + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha="
-				+ fecha + ", idplantel=" + idplantel + "]";
+				+ fecha + ", idadmin=" + idadmin + ", idplantel=" + idplantel + "]";
 	}
+
     
 }

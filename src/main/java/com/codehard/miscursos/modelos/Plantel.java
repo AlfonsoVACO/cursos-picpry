@@ -205,28 +205,115 @@ public class Plantel implements Serializable {
         this.configList = configList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idplantel != null ? idplantel.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alumnoList == null) ? 0 : alumnoList.hashCode());
+		result = prime * result + ((cd == null) ? 0 : cd.hashCode());
+		result = prime * result + ((configList == null) ? 0 : configList.hashCode());
+		result = prime * result + ((contactoList == null) ? 0 : contactoList.hashCode());
+		result = prime * result + ((cursosList == null) ? 0 : cursosList.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idestado == null) ? 0 : idestado.hashCode());
+		result = prime * result + ((idmunicipio == null) ? 0 : idmunicipio.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + Arrays.hashCode(img);
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((noticiasList == null) ? 0 : noticiasList.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Plantel)) {
-            return false;
-        }
-        Plantel other = (Plantel) object;
-        return !((this.idplantel == null && other.idplantel != null) || (this.idplantel != null && !this.idplantel.equals(other.idplantel)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Plantel other = (Plantel) obj;
+		if (alumnoList == null) {
+			if (other.alumnoList != null)
+				return false;
+		} else if (!alumnoList.equals(other.alumnoList))
+			return false;
+		if (cd == null) {
+			if (other.cd != null)
+				return false;
+		} else if (!cd.equals(other.cd))
+			return false;
+		if (configList == null) {
+			if (other.configList != null)
+				return false;
+		} else if (!configList.equals(other.configList))
+			return false;
+		if (contactoList == null) {
+			if (other.contactoList != null)
+				return false;
+		} else if (!contactoList.equals(other.contactoList))
+			return false;
+		if (cursosList == null) {
+			if (other.cursosList != null)
+				return false;
+		} else if (!cursosList.equals(other.cursosList))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idestado == null) {
+			if (other.idestado != null)
+				return false;
+		} else if (!idestado.equals(other.idestado))
+			return false;
+		if (idmunicipio == null) {
+			if (other.idmunicipio != null)
+				return false;
+		} else if (!idmunicipio.equals(other.idmunicipio))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (!Arrays.equals(img, other.img))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (noticiasList == null) {
+			if (other.noticiasList != null)
+				return false;
+		} else if (!noticiasList.equals(other.noticiasList))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Plantel [idplantel=" + idplantel + ", nombre=" + nombre + ", direccion=" + direccion + ", cd=" + cd
 				+ ", img=" + Arrays.toString(img) + ", descripcion=" + descripcion + ", cursosList=" + cursosList
-				+ ", contactoList=" + contactoList + ", alumnoList=" + alumnoList + ", noticiasList=" + noticiasList
-				+ ", configList=" + configList + ", idestado=" + idestado + ", idmunicipio=" + idmunicipio + "]";
+				+ ", idadmin=" + idadmin + ", idestado=" + idestado + ", idmunicipio=" + idmunicipio + ", contactoList="
+				+ contactoList + ", alumnoList=" + alumnoList + ", noticiasList=" + noticiasList + ", configList="
+				+ configList + "]";
 	}
+
+
     
 }

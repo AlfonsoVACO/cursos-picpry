@@ -96,26 +96,57 @@ public class Calificacion implements Serializable {
         this.idcurso = idcurso;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idcalificacion != null ? idcalificacion.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
+		result = prime * result + estrellas;
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idcalificacion == null) ? 0 : idcalificacion.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Calificacion)) {
-            return false;
-        }
-        Calificacion other = (Calificacion) object;
-        return !((this.idcalificacion == null && other.idcalificacion != null) || (this.idcalificacion != null && !this.idcalificacion.equals(other.idcalificacion)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Calificacion other = (Calificacion) obj;
+		if (comentario == null) {
+			if (other.comentario != null)
+				return false;
+		} else if (!comentario.equals(other.comentario))
+			return false;
+		if (estrellas != other.estrellas)
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idcalificacion == null) {
+			if (other.idcalificacion != null)
+				return false;
+		} else if (!idcalificacion.equals(other.idcalificacion))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Calificacion [idcalificacion=" + idcalificacion + ", estrellas=" + estrellas + ", comentario="
 				+ comentario + ", idalumno=" + idalumno + ", idcurso=" + idcurso + "]";
 	}
+
     
 }

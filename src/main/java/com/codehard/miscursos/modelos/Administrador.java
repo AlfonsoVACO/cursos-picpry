@@ -222,30 +222,113 @@ public class Administrador implements Serializable {
         this.configList = configList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idadmin != null ? idadmin.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(actualizar);
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		result = prime * result + ((configList == null) ? 0 : configList.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((cursosList == null) ? 0 : cursosList.hashCode());
+		result = prime * result + Arrays.hashCode(eliminar);
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idrol == null) ? 0 : idrol.hashCode());
+		result = prime * result + Arrays.hashCode(img);
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((noticiasList == null) ? 0 : noticiasList.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((plantelList == null) ? 0 : plantelList.hashCode());
+		result = prime * result + ((profesorList == null) ? 0 : profesorList.hashCode());
+		result = prime * result + Arrays.hashCode(registrar);
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Administrador)) {
-            return false;
-        }
-        Administrador other = (Administrador) object;
-        return !((this.idadmin == null && other.idadmin != null) || (this.idadmin != null && !this.idadmin.equals(other.idadmin)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Administrador other = (Administrador) obj;
+		if (!Arrays.equals(actualizar, other.actualizar))
+			return false;
+		if (clave == null) {
+			if (other.clave != null)
+				return false;
+		} else if (!clave.equals(other.clave))
+			return false;
+		if (configList == null) {
+			if (other.configList != null)
+				return false;
+		} else if (!configList.equals(other.configList))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (cursosList == null) {
+			if (other.cursosList != null)
+				return false;
+		} else if (!cursosList.equals(other.cursosList))
+			return false;
+		if (!Arrays.equals(eliminar, other.eliminar))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idrol == null) {
+			if (other.idrol != null)
+				return false;
+		} else if (!idrol.equals(other.idrol))
+			return false;
+		if (!Arrays.equals(img, other.img))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (noticiasList == null) {
+			if (other.noticiasList != null)
+				return false;
+		} else if (!noticiasList.equals(other.noticiasList))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (plantelList == null) {
+			if (other.plantelList != null)
+				return false;
+		} else if (!plantelList.equals(other.plantelList))
+			return false;
+		if (profesorList == null) {
+			if (other.profesorList != null)
+				return false;
+		} else if (!profesorList.equals(other.profesorList))
+			return false;
+		if (!Arrays.equals(registrar, other.registrar))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Administrador [idadmin=" + idadmin + ", clave=" + clave + ", nombre=" + nombre + ", correo=" + correo
 				+ ", password=" + password + ", actualizar=" + Arrays.toString(actualizar) + ", registrar="
 				+ Arrays.toString(registrar) + ", eliminar=" + Arrays.toString(eliminar) + ", img="
-				+ Arrays.toString(img) + ", cursosList=" + cursosList + ", profesorList=" + profesorList
-				+ ", noticiasList=" + noticiasList + ", configList=" + configList + ", plantelList=" + plantelList
-				+ "]";
+				+ Arrays.toString(img) + ", cursosList=" + cursosList + ", plantelList=" + plantelList + ", idrol="
+				+ idrol + ", profesorList=" + profesorList + ", noticiasList=" + noticiasList + ", configList="
+				+ configList + "]";
 	}
+
+
     
 }

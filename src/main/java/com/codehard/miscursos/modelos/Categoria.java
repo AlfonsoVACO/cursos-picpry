@@ -74,26 +74,48 @@ public class Categoria implements Serializable {
         this.cursosList = cursosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idcategoria != null ? idcategoria.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cursosList == null) ? 0 : cursosList.hashCode());
+		result = prime * result + ((idcategoria == null) ? 0 : idcategoria.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Categoria)) {
-            return false;
-        }
-        Categoria other = (Categoria) object;
-        return !((this.idcategoria == null && other.idcategoria != null) || (this.idcategoria != null && !this.idcategoria.equals(other.idcategoria)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categoria other = (Categoria) obj;
+		if (cursosList == null) {
+			if (other.cursosList != null)
+				return false;
+		} else if (!cursosList.equals(other.cursosList))
+			return false;
+		if (idcategoria == null) {
+			if (other.idcategoria != null)
+				return false;
+		} else if (!idcategoria.equals(other.idcategoria))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Categoria [idcategoria=" + idcategoria + ", nombre=" + nombre + ", cursosList=" + cursosList + "]";
 	}
+
     
 }
 

@@ -129,26 +129,70 @@ public class Libros implements Serializable {
         this.idcurso = idcurso;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idlibro != null ? idlibro.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + Arrays.hashCode(estatus);
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idlibro == null) ? 0 : idlibro.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Libros)) {
-            return false;
-        }
-        Libros other = (Libros) object;
-        return !((this.idlibro == null && other.idlibro != null) || (this.idlibro != null && !this.idlibro.equals(other.idlibro)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Libros other = (Libros) obj;
+		if (autor == null) {
+			if (other.autor != null)
+				return false;
+		} else if (!autor.equals(other.autor))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (!Arrays.equals(estatus, other.estatus))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		if (idlibro == null) {
+			if (other.idlibro != null)
+				return false;
+		} else if (!idlibro.equals(other.idlibro))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (precio == null) {
+			if (other.precio != null)
+				return false;
+		} else if (!precio.equals(other.precio))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Libros [idlibro=" + idlibro + ", nombre=" + nombre + ", descripcion=" + descripcion + ", autor=" + autor
 				+ ", estatus=" + Arrays.toString(estatus) + ", precio=" + precio + ", idcurso=" + idcurso + "]";
 	}
+
+
     
 }

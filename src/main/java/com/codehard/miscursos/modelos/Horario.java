@@ -105,27 +105,61 @@ public class Horario implements Serializable {
         this.cursosList = cursosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idhorario != null ? idhorario.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cursosList == null) ? 0 : cursosList.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((fechaa == null) ? 0 : fechaa.hashCode());
+		result = prime * result + ((fechade == null) ? 0 : fechade.hashCode());
+		result = prime * result + ((idhorario == null) ? 0 : idhorario.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Horario)) {
-            return false;
-        }
-        Horario other = (Horario) object;
-        return !((this.idhorario == null && other.idhorario != null) || (this.idhorario != null && !this.idhorario.equals(other.idhorario)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Horario other = (Horario) obj;
+		if (cursosList == null) {
+			if (other.cursosList != null)
+				return false;
+		} else if (!cursosList.equals(other.cursosList))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (fechaa == null) {
+			if (other.fechaa != null)
+				return false;
+		} else if (!fechaa.equals(other.fechaa))
+			return false;
+		if (fechade == null) {
+			if (other.fechade != null)
+				return false;
+		} else if (!fechade.equals(other.fechade))
+			return false;
+		if (idhorario == null) {
+			if (other.idhorario != null)
+				return false;
+		} else if (!idhorario.equals(other.idhorario))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Horario [idhorario=" + idhorario + ", descripcion=" + descripcion + ", fechade=" + fechade + ", fechaa="
 				+ fechaa + ", cursosList=" + cursosList + "]";
 	}
+
     
 }
 

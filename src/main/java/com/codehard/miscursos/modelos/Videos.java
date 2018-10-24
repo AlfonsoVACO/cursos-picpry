@@ -98,27 +98,62 @@ public class Videos implements Serializable {
         this.idtema = idtema;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idvideo != null ? idvideo.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Videos)) {
-            return false;
-        }
-        Videos other = (Videos) object;
-        return !((this.idvideo == null && other.idvideo != null) || (this.idvideo != null && !this.idvideo.equals(other.idvideo)));
-    }
-
-    @Override
+	@Override
 	public String toString() {
 		return "Videos [idvideo=" + idvideo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", url=" + url
-				+ ", Tema=" + idtema + "]";
+				+ ", idtema=" + idtema + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((idtema == null) ? 0 : idtema.hashCode());
+		result = prime * result + ((idvideo == null) ? 0 : idvideo.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Videos other = (Videos) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (idtema == null) {
+			if (other.idtema != null)
+				return false;
+		} else if (!idtema.equals(other.idtema))
+			return false;
+		if (idvideo == null) {
+			if (other.idvideo != null)
+				return false;
+		} else if (!idvideo.equals(other.idvideo))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
+
+    
     
 }
 

@@ -179,27 +179,91 @@ public class Pagos implements Serializable {
         this.idcurso = idcurso;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idpago != null ? idpago.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
+		result = prime * result + estatus;
+		result = prime * result + ((fechapago == null) ? 0 : fechapago.hashCode());
+		result = prime * result + ((fecharegistro == null) ? 0 : fecharegistro.hashCode());
+		result = prime * result + ((fechavencimiento == null) ? 0 : fechavencimiento.hashCode());
+		result = prime * result + folioefectivo;
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idpago == null) ? 0 : idpago.hashCode());
+		result = prime * result + ((tiket == null) ? 0 : tiket.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Pagos)) {
-            return false;
-        }
-        Pagos other = (Pagos) object;
-        return !((this.idpago == null && other.idpago != null) || (this.idpago != null && !this.idpago.equals(other.idpago)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pagos other = (Pagos) obj;
+		if (cantidad == null) {
+			if (other.cantidad != null)
+				return false;
+		} else if (!cantidad.equals(other.cantidad))
+			return false;
+		if (estatus != other.estatus)
+			return false;
+		if (fechapago == null) {
+			if (other.fechapago != null)
+				return false;
+		} else if (!fechapago.equals(other.fechapago))
+			return false;
+		if (fecharegistro == null) {
+			if (other.fecharegistro != null)
+				return false;
+		} else if (!fecharegistro.equals(other.fecharegistro))
+			return false;
+		if (fechavencimiento == null) {
+			if (other.fechavencimiento != null)
+				return false;
+		} else if (!fechavencimiento.equals(other.fechavencimiento))
+			return false;
+		if (folioefectivo != other.folioefectivo)
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		if (idpago == null) {
+			if (other.idpago != null)
+				return false;
+		} else if (!idpago.equals(other.idpago))
+			return false;
+		if (tiket == null) {
+			if (other.tiket != null)
+				return false;
+		} else if (!tiket.equals(other.tiket))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
-		return "Pagos [idpago=" + idpago + ", cantidad=" + cantidad + ", estatus=" + estatus + ", tipo=" + tipo
-				+ ", fecharegistro=" + fecharegistro + ", fechapago=" + fechapago + ", tiket=" + tiket + ", idalumno="
-				+ idalumno + ", idcurso=" + idcurso + "]";
+		return "Pagos [idpago=" + idpago + ", cantidad=" + cantidad + ", estatus=" + estatus + ", folioefectivo="
+				+ folioefectivo + ", tipo=" + tipo + ", fecharegistro=" + fecharegistro + ", fechavencimiento="
+				+ fechavencimiento + ", fechapago=" + fechapago + ", tiket=" + tiket + ", idalumno=" + idalumno
+				+ ", idcurso=" + idcurso + "]";
 	}
     
 }

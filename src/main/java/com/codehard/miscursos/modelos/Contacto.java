@@ -142,26 +142,75 @@ public class Contacto implements Serializable {
         this.idplantel = idplantel;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idcontacto != null ? idcontacto.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + estado;
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((idcontacto == null) ? 0 : idcontacto.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + ((mensaje == null) ? 0 : mensaje.hashCode());
+		result = prime * result + ((motivo == null) ? 0 : motivo.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Contacto)) {
-            return false;
-        }
-        Contacto other = (Contacto) object;
-        return !((this.idcontacto == null && other.idcontacto != null) || (this.idcontacto != null && !this.idcontacto.equals(other.idcontacto)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contacto other = (Contacto) obj;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (estado != other.estado)
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (idcontacto == null) {
+			if (other.idcontacto != null)
+				return false;
+		} else if (!idcontacto.equals(other.idcontacto))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (mensaje == null) {
+			if (other.mensaje != null)
+				return false;
+		} else if (!mensaje.equals(other.mensaje))
+			return false;
+		if (motivo == null) {
+			if (other.motivo != null)
+				return false;
+		} else if (!motivo.equals(other.motivo))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Contacto [idcontacto=" + idcontacto + ", nombre=" + nombre + ", correo=" + correo + ", motivo=" + motivo
-				+ ", mensaje=" + mensaje + ", fecha=" + fecha + ", idplantel=" + idplantel + "]";
+				+ ", mensaje=" + mensaje + ", fecha=" + fecha + ", estado=" + estado + ", idplantel=" + idplantel + "]";
 	}
+
     
 }

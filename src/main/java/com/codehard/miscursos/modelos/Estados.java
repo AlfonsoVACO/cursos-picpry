@@ -85,27 +85,55 @@ public class Estados implements Serializable {
         this.alumnoList = alumnoList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idestado != null ? idestado.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Estados)) {
-            return false;
-        }
-        Estados other = (Estados) object;
-        return !((this.idestado == null && other.idestado != null) || (this.idestado != null && !this.idestado.equals(other.idestado)));
-    }
-
-    @Override
-	public String toString() {
-		return "Estados [idestado=" + idestado + ", nombre=" + nombre + ", alumnoList=" + alumnoList + ", plantelList="
-				+ plantelList + "]";
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alumnoList == null) ? 0 : alumnoList.hashCode());
+		result = prime * result + ((idestado == null) ? 0 : idestado.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((plantelList == null) ? 0 : plantelList.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estados other = (Estados) obj;
+		if (alumnoList == null) {
+			if (other.alumnoList != null)
+				return false;
+		} else if (!alumnoList.equals(other.alumnoList))
+			return false;
+		if (idestado == null) {
+			if (other.idestado != null)
+				return false;
+		} else if (!idestado.equals(other.idestado))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (plantelList == null) {
+			if (other.plantelList != null)
+				return false;
+		} else if (!plantelList.equals(other.plantelList))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Estados [idestado=" + idestado + ", nombre=" + nombre + ", plantelList=" + plantelList + ", alumnoList="
+				+ alumnoList + "]";
+	}
+
     
 }
 

@@ -84,26 +84,54 @@ public class Comentarios implements Serializable {
         this.idcurso = idcurso;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idcomentario != null ? idcomentario.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comentario == null) ? 0 : comentario.hashCode());
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idcomentario == null) ? 0 : idcomentario.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Comentarios)) {
-            return false;
-        }
-        Comentarios other = (Comentarios) object;
-        return !((this.idcomentario == null && other.idcomentario != null) || (this.idcomentario != null && !this.idcomentario.equals(other.idcomentario)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comentarios other = (Comentarios) obj;
+		if (comentario == null) {
+			if (other.comentario != null)
+				return false;
+		} else if (!comentario.equals(other.comentario))
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idcomentario == null) {
+			if (other.idcomentario != null)
+				return false;
+		} else if (!idcomentario.equals(other.idcomentario))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Comentarios [idcomentario=" + idcomentario + ", comentario=" + comentario + ", idalumno=" + idalumno
 				+ ", idcurso=" + idcurso + "]";
 	}
+
         
 }

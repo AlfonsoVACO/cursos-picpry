@@ -206,29 +206,104 @@ public class Profesor implements Serializable {
         this.idrol = idrol;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idprofesor != null ? idprofesor.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(actualiza);
+		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((cursoProfesorList == null) ? 0 : cursoProfesorList.hashCode());
+		result = prime * result + Arrays.hashCode(eliminar);
+		result = prime * result + ((fecharegistro == null) ? 0 : fecharegistro.hashCode());
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idprofesor == null) ? 0 : idprofesor.hashCode());
+		result = prime * result + ((idrol == null) ? 0 : idrol.hashCode());
+		result = prime * result + Arrays.hashCode(img);
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Profesor)) {
-            return false;
-        }
-        Profesor other = (Profesor) object;
-        return !((this.idprofesor == null && other.idprofesor != null) || (this.idprofesor != null && !this.idprofesor.equals(other.idprofesor)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Profesor other = (Profesor) obj;
+		if (!Arrays.equals(actualiza, other.actualiza))
+			return false;
+		if (apellidos == null) {
+			if (other.apellidos != null)
+				return false;
+		} else if (!apellidos.equals(other.apellidos))
+			return false;
+		if (clave == null) {
+			if (other.clave != null)
+				return false;
+		} else if (!clave.equals(other.clave))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (cursoProfesorList == null) {
+			if (other.cursoProfesorList != null)
+				return false;
+		} else if (!cursoProfesorList.equals(other.cursoProfesorList))
+			return false;
+		if (!Arrays.equals(eliminar, other.eliminar))
+			return false;
+		if (fecharegistro == null) {
+			if (other.fecharegistro != null)
+				return false;
+		} else if (!fecharegistro.equals(other.fecharegistro))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idprofesor == null) {
+			if (other.idprofesor != null)
+				return false;
+		} else if (!idprofesor.equals(other.idprofesor))
+			return false;
+		if (idrol == null) {
+			if (other.idrol != null)
+				return false;
+		} else if (!idrol.equals(other.idrol))
+			return false;
+		if (!Arrays.equals(img, other.img))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Profesor [idprofesor=" + idprofesor + ", clave=" + clave + ", nombre=" + nombre + ", apellidos="
 				+ apellidos + ", correo=" + correo + ", password=" + password + ", actualiza="
 				+ Arrays.toString(actualiza) + ", eliminar=" + Arrays.toString(eliminar) + ", img="
-				+ Arrays.toString(img) + ", idadmin=" + idadmin + ", cursoProfesorList=" + cursoProfesorList + "]";
+				+ Arrays.toString(img) + ", fecharegistro=" + fecharegistro + ", cursoProfesorList=" + cursoProfesorList
+				+ ", idadmin=" + idadmin + ", idrol=" + idrol + "]";
 	}
+
+
     
 }
 

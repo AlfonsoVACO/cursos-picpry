@@ -89,26 +89,55 @@ public class Resetopass implements Serializable {
         this.idalumno = idalumno;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idresetopass != null ? idresetopass.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((creado == null) ? 0 : creado.hashCode());
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idresetopass == null) ? 0 : idresetopass.hashCode());
+		result = prime * result + ((token == null) ? 0 : token.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Resetopass)) {
-            return false;
-        }
-        Resetopass other = (Resetopass) object;
-        return !((this.idresetopass == null && other.idresetopass != null) || (this.idresetopass != null && !this.idresetopass.equals(other.idresetopass)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Resetopass other = (Resetopass) obj;
+		if (creado == null) {
+			if (other.creado != null)
+				return false;
+		} else if (!creado.equals(other.creado))
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idresetopass == null) {
+			if (other.idresetopass != null)
+				return false;
+		} else if (!idresetopass.equals(other.idresetopass))
+			return false;
+		if (token == null) {
+			if (other.token != null)
+				return false;
+		} else if (!token.equals(other.token))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Resetopass [idresetopass=" + idresetopass + ", token=" + token + ", creado=" + creado + ", idalumno="
 				+ idalumno + "]";
 	}
+
+
     
 }

@@ -289,31 +289,159 @@ public class Alumno implements Serializable {
         this.pagosList = pagosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idalumno != null ? idalumno.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
+		result = prime * result + ((asistenciaList == null) ? 0 : asistenciaList.hashCode());
+		result = prime * result + ((calificacionList == null) ? 0 : calificacionList.hashCode());
+		result = prime * result + ((comentariosList == null) ? 0 : comentariosList.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((cp == null) ? 0 : cp.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + Arrays.hashCode(estado);
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idestado == null) ? 0 : idestado.hashCode());
+		result = prime * result + ((idmunicipio == null) ? 0 : idmunicipio.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + ((idrol == null) ? 0 : idrol.hashCode());
+		result = prime * result + ((img == null) ? 0 : img.hashCode());
+		result = prime * result + ((keydes == null) ? 0 : keydes.hashCode());
+		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((pagosList == null) ? 0 : pagosList.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((resetopassList == null) ? 0 : resetopassList.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Alumno)) {
-            return false;
-        }
-        Alumno other = (Alumno) object;
-        return !((this.idalumno == null && other.idalumno != null) || (this.idalumno != null && !this.idalumno.equals(other.idalumno)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alumno other = (Alumno) obj;
+		if (apellidos == null) {
+			if (other.apellidos != null)
+				return false;
+		} else if (!apellidos.equals(other.apellidos))
+			return false;
+		if (asistenciaList == null) {
+			if (other.asistenciaList != null)
+				return false;
+		} else if (!asistenciaList.equals(other.asistenciaList))
+			return false;
+		if (calificacionList == null) {
+			if (other.calificacionList != null)
+				return false;
+		} else if (!calificacionList.equals(other.calificacionList))
+			return false;
+		if (comentariosList == null) {
+			if (other.comentariosList != null)
+				return false;
+		} else if (!comentariosList.equals(other.comentariosList))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (cp == null) {
+			if (other.cp != null)
+				return false;
+		} else if (!cp.equals(other.cp))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (!Arrays.equals(estado, other.estado))
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idestado == null) {
+			if (other.idestado != null)
+				return false;
+		} else if (!idestado.equals(other.idestado))
+			return false;
+		if (idmunicipio == null) {
+			if (other.idmunicipio != null)
+				return false;
+		} else if (!idmunicipio.equals(other.idmunicipio))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (idrol == null) {
+			if (other.idrol != null)
+				return false;
+		} else if (!idrol.equals(other.idrol))
+			return false;
+		if (img == null) {
+			if (other.img != null)
+				return false;
+		} else if (!img.equals(other.img))
+			return false;
+		if (keydes == null) {
+			if (other.keydes != null)
+				return false;
+		} else if (!keydes.equals(other.keydes))
+			return false;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (pagosList == null) {
+			if (other.pagosList != null)
+				return false;
+		} else if (!pagosList.equals(other.pagosList))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (resetopassList == null) {
+			if (other.resetopassList != null)
+				return false;
+		} else if (!resetopassList.equals(other.resetopassList))
+			return false;
+		if (telefono == null) {
+			if (other.telefono != null)
+				return false;
+		} else if (!telefono.equals(other.telefono))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Alumno [idalumno=" + idalumno + ", matricula=" + matricula + ", nombre=" + nombre + ", apellidos="
 				+ apellidos + ", telefono=" + telefono + ", direccion=" + direccion + ", cp=" + cp + ", img=" + img
 				+ ", correo=" + correo + ", password=" + password + ", estado=" + Arrays.toString(estado) + ", keydes="
-				+ keydes + ", idestado=" + idestado + ", idmunicipio=" + idmunicipio + ", idplantel=" + idplantel
-				+ ", pagosList=" + pagosList + ", asistenciaList=" + asistenciaList + ", comentariosList="
-				+ comentariosList + "]";
+				+ keydes + ", calificacionList=" + calificacionList + ", asistenciaList=" + asistenciaList
+				+ ", comentariosList=" + comentariosList + ", resetopassList=" + resetopassList + ", idestado="
+				+ idestado + ", idmunicipio=" + idmunicipio + ", idplantel=" + idplantel + ", idrol=" + idrol
+				+ ", pagosList=" + pagosList + "]";
 	}
-    
+
+
 }
 

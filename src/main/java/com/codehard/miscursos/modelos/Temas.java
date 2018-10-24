@@ -112,25 +112,67 @@ public class Temas implements Serializable {
         this.recursosList = recursosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idtema != null ? idtema.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idtema == null) ? 0 : idtema.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((recursosList == null) ? 0 : recursosList.hashCode());
+		result = prime * result + ((videosList == null) ? 0 : videosList.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Temas)) {
-            return false;
-        }
-        Temas other = (Temas) object;
-        return !((this.idtema == null && other.idtema != null) || (this.idtema != null && !this.idtema.equals(other.idtema)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Temas other = (Temas) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		if (idtema == null) {
+			if (other.idtema != null)
+				return false;
+		} else if (!idtema.equals(other.idtema))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (recursosList == null) {
+			if (other.recursosList != null)
+				return false;
+		} else if (!recursosList.equals(other.recursosList))
+			return false;
+		if (videosList == null) {
+			if (other.videosList != null)
+				return false;
+		} else if (!videosList.equals(other.videosList))
+			return false;
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "com.hardasarock.miscursos.modelos.Temas[ idtema=" + idtema + " ]";
-    }
+	@Override
+	public String toString() {
+		return "Temas [idtema=" + idtema + ", nombre=" + nombre + ", descripcion=" + descripcion + ", videosList="
+				+ videosList + ", idcurso=" + idcurso + ", recursosList=" + recursosList + "]";
+	}
+
+    
     
 }

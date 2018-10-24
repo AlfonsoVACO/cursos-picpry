@@ -294,21 +294,141 @@ public class Cursos implements Serializable {
         this.librosList = librosList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idcurso != null ? idcurso.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((asistenciaList == null) ? 0 : asistenciaList.hashCode());
+		result = prime * result + ((calificacionList == null) ? 0 : calificacionList.hashCode());
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		result = prime * result + ((comentariosList == null) ? 0 : comentariosList.hashCode());
+		result = prime * result + ((costo == null) ? 0 : costo.hashCode());
+		result = prime * result + cupo;
+		result = prime * result + cupotemp;
+		result = prime * result + ((cursoProfesorList == null) ? 0 : cursoProfesorList.hashCode());
+		result = prime * result + ((descripcioncorta == null) ? 0 : descripcioncorta.hashCode());
+		result = prime * result + ((descripcionlarga == null) ? 0 : descripcionlarga.hashCode());
+		result = prime * result + Arrays.hashCode(estado);
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idcategoria == null) ? 0 : idcategoria.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idhorario == null) ? 0 : idhorario.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + ((img == null) ? 0 : img.hashCode());
+		result = prime * result + ((librosList == null) ? 0 : librosList.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((pagosList == null) ? 0 : pagosList.hashCode());
+		result = prime * result + ((temasList == null) ? 0 : temasList.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Cursos)) {
-            return false;
-        }
-        Cursos other = (Cursos) object;
-        return !((this.idcurso == null && other.idcurso != null) || (this.idcurso != null && !this.idcurso.equals(other.idcurso)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cursos other = (Cursos) obj;
+		if (asistenciaList == null) {
+			if (other.asistenciaList != null)
+				return false;
+		} else if (!asistenciaList.equals(other.asistenciaList))
+			return false;
+		if (calificacionList == null) {
+			if (other.calificacionList != null)
+				return false;
+		} else if (!calificacionList.equals(other.calificacionList))
+			return false;
+		if (clave == null) {
+			if (other.clave != null)
+				return false;
+		} else if (!clave.equals(other.clave))
+			return false;
+		if (comentariosList == null) {
+			if (other.comentariosList != null)
+				return false;
+		} else if (!comentariosList.equals(other.comentariosList))
+			return false;
+		if (costo == null) {
+			if (other.costo != null)
+				return false;
+		} else if (!costo.equals(other.costo))
+			return false;
+		if (cupo != other.cupo)
+			return false;
+		if (cupotemp != other.cupotemp)
+			return false;
+		if (cursoProfesorList == null) {
+			if (other.cursoProfesorList != null)
+				return false;
+		} else if (!cursoProfesorList.equals(other.cursoProfesorList))
+			return false;
+		if (descripcioncorta == null) {
+			if (other.descripcioncorta != null)
+				return false;
+		} else if (!descripcioncorta.equals(other.descripcioncorta))
+			return false;
+		if (descripcionlarga == null) {
+			if (other.descripcionlarga != null)
+				return false;
+		} else if (!descripcionlarga.equals(other.descripcionlarga))
+			return false;
+		if (!Arrays.equals(estado, other.estado))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idcategoria == null) {
+			if (other.idcategoria != null)
+				return false;
+		} else if (!idcategoria.equals(other.idcategoria))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		if (idhorario == null) {
+			if (other.idhorario != null)
+				return false;
+		} else if (!idhorario.equals(other.idhorario))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (img == null) {
+			if (other.img != null)
+				return false;
+		} else if (!img.equals(other.img))
+			return false;
+		if (librosList == null) {
+			if (other.librosList != null)
+				return false;
+		} else if (!librosList.equals(other.librosList))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (pagosList == null) {
+			if (other.pagosList != null)
+				return false;
+		} else if (!pagosList.equals(other.pagosList))
+			return false;
+		if (temasList == null) {
+			if (other.temasList != null)
+				return false;
+		} else if (!temasList.equals(other.temasList))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -320,6 +440,7 @@ public class Cursos implements Serializable {
 				+ ", asistenciaList=" + asistenciaList + ", temasList=" + temasList + ", comentariosList="
 				+ comentariosList + ", pagosList=" + pagosList + ", librosList=" + librosList + "]";
 	}
+
     
 }
 

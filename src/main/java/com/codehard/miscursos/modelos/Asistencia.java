@@ -102,26 +102,57 @@ public class Asistencia implements Serializable {
         this.idcurso = idcurso;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idasistencia != null ? idasistencia.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(asistio);
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((idalumno == null) ? 0 : idalumno.hashCode());
+		result = prime * result + ((idasistencia == null) ? 0 : idasistencia.hashCode());
+		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Asistencia)) {
-            return false;
-        }
-        Asistencia other = (Asistencia) object;
-        return !((this.idasistencia == null && other.idasistencia != null) || (this.idasistencia != null && !this.idasistencia.equals(other.idasistencia)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Asistencia other = (Asistencia) obj;
+		if (!Arrays.equals(asistio, other.asistio))
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (idalumno == null) {
+			if (other.idalumno != null)
+				return false;
+		} else if (!idalumno.equals(other.idalumno))
+			return false;
+		if (idasistencia == null) {
+			if (other.idasistencia != null)
+				return false;
+		} else if (!idasistencia.equals(other.idasistencia))
+			return false;
+		if (idcurso == null) {
+			if (other.idcurso != null)
+				return false;
+		} else if (!idcurso.equals(other.idcurso))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Asistencia [idasistencia=" + idasistencia + ", asistio=" + Arrays.toString(asistio) + ", fecha=" + fecha
 				+ ", idalumno=" + idalumno + ", idcurso=" + idcurso + "]";
 	}
+
 
 }

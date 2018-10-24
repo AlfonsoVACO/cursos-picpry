@@ -96,27 +96,62 @@ public class Roles implements Serializable {
         this.profesorList = profesorList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idrol != null ? idrol.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((administradorList == null) ? 0 : administradorList.hashCode());
+		result = prime * result + ((alumnoList == null) ? 0 : alumnoList.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((idrol == null) ? 0 : idrol.hashCode());
+		result = prime * result + ((profesorList == null) ? 0 : profesorList.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Roles)) {
-            return false;
-        }
-        Roles other = (Roles) object;
-        return !((this.idrol == null && other.idrol != null) || (this.idrol != null && !this.idrol.equals(other.idrol)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Roles other = (Roles) obj;
+		if (administradorList == null) {
+			if (other.administradorList != null)
+				return false;
+		} else if (!administradorList.equals(other.administradorList))
+			return false;
+		if (alumnoList == null) {
+			if (other.alumnoList != null)
+				return false;
+		} else if (!alumnoList.equals(other.alumnoList))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (idrol == null) {
+			if (other.idrol != null)
+				return false;
+		} else if (!idrol.equals(other.idrol))
+			return false;
+		if (profesorList == null) {
+			if (other.profesorList != null)
+				return false;
+		} else if (!profesorList.equals(other.profesorList))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Roles [idrol=" + idrol + ", descripcion=" + descripcion + ", administradorList=" + administradorList
 				+ ", alumnoList=" + alumnoList + ", profesorList=" + profesorList + "]";
 	}
+
+
     
 }
 

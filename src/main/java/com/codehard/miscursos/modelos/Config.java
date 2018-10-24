@@ -106,26 +106,66 @@ public class Config implements Serializable {
         this.idplantel = idplantel;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idconfig != null ? idconfig.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((idadmin == null) ? 0 : idadmin.hashCode());
+		result = prime * result + ((idconfig == null) ? 0 : idconfig.hashCode());
+		result = prime * result + ((idplantel == null) ? 0 : idplantel.hashCode());
+		result = prime * result + ((otro == null) ? 0 : otro.hashCode());
+		result = prime * result + ((tipoletra == null) ? 0 : tipoletra.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Config)) {
-            return false;
-        }
-        Config other = (Config) object;
-        return !((this.idconfig == null && other.idconfig != null) || (this.idconfig != null && !this.idconfig.equals(other.idconfig)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Config other = (Config) obj;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (idadmin == null) {
+			if (other.idadmin != null)
+				return false;
+		} else if (!idadmin.equals(other.idadmin))
+			return false;
+		if (idconfig == null) {
+			if (other.idconfig != null)
+				return false;
+		} else if (!idconfig.equals(other.idconfig))
+			return false;
+		if (idplantel == null) {
+			if (other.idplantel != null)
+				return false;
+		} else if (!idplantel.equals(other.idplantel))
+			return false;
+		if (otro == null) {
+			if (other.otro != null)
+				return false;
+		} else if (!otro.equals(other.otro))
+			return false;
+		if (tipoletra == null) {
+			if (other.tipoletra != null)
+				return false;
+		} else if (!tipoletra.equals(other.tipoletra))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Config [idconfig=" + idconfig + ", color=" + color + ", tipoletra=" + tipoletra + ", otro=" + otro
-				+ ", idplantel=" + idplantel + "]";
+				+ ", idadmin=" + idadmin + ", idplantel=" + idplantel + "]";
 	}
+
     
 }

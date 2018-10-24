@@ -118,27 +118,67 @@ public class Recursos implements Serializable {
         this.idtema = idtema;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idrecurso != null ? idrecurso.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((archivosList == null) ? 0 : archivosList.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((idrecurso == null) ? 0 : idrecurso.hashCode());
+		result = prime * result + ((idtema == null) ? 0 : idtema.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Recursos)) {
-            return false;
-        }
-        Recursos other = (Recursos) object;
-        return !((this.idrecurso == null && other.idrecurso != null) || (this.idrecurso != null && !this.idrecurso.equals(other.idrecurso)));
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recursos other = (Recursos) obj;
+		if (archivosList == null) {
+			if (other.archivosList != null)
+				return false;
+		} else if (!archivosList.equals(other.archivosList))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (idrecurso == null) {
+			if (other.idrecurso != null)
+				return false;
+		} else if (!idrecurso.equals(other.idrecurso))
+			return false;
+		if (idtema == null) {
+			if (other.idtema != null)
+				return false;
+		} else if (!idtema.equals(other.idtema))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
 	public String toString() {
 		return "Recursos [idrecurso=" + idrecurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha="
-				+ fecha + ", archivosList=" + archivosList + ", idTema=" + idtema + "]";
+				+ fecha + ", archivosList=" + archivosList + ", idtema=" + idtema + "]";
 	}
+
     
 }
 
