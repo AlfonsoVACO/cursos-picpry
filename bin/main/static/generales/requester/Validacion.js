@@ -50,10 +50,10 @@ jQuery.getScript("./generales/requester/OperationsValidation.js", function(){
 							}
 						}break;
 						case "TEXTAREA": {
-							values[i] = operations.getValueText(value,atributoId);
+							values[i] = operations.getValueText(value,true);
 						}break;
 						case "SELECT": {
-							values[i] = operations.getValueSelect(value, atributoId);
+							values[i] = operations.getValueSelect(value, true);
 						}break;
 						default:break;
 					}
@@ -163,6 +163,19 @@ var clearList;
 var clearElements;
 var convertToClass;
 var convertToObject;
+
+jQuery(".data-numeric").keypress(function() {
+	if (!/^([1-9])*$/.exec(jQuery(this).val())){
+		jQuery(this).val("");
+	}
+});
+
+jQuery(".data-decimal").keypress(function() {
+	if (!/^[1-9]+([.])?([0-9]+)?$/.exec(jQuery(this).val())) {
+		jQuery(this).val("");
+	}
+});
+
 jQuery.getScript("./generales/requester/OperationsElements.js", function(){
 	
 	clearList = function( lstString ){
@@ -187,18 +200,5 @@ jQuery.getScript("./generales/requester/OperationsElements.js", function(){
 		return execution.convertToObject( remain );
 	}
 	
-	jQuery(".data-numeric").keypress(function() {
-		var operations = new OperationsValidation();
-		if (operations.getExpresion(jQuery(this).val(), "n")) {
-			jQuery(this).val("");
-		}
-	});
-
-	jQuery(".data-decimal").keypress(function() {
-		var operations = new OperationsValidation();
-		if (operations.getExpresion(jQuery(this).val(), "n")) {
-			jQuery(this).val("");
-		}
-	});
 	
 });

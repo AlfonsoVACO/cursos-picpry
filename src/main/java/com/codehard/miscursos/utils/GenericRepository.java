@@ -1,9 +1,24 @@
 package com.codehard.miscursos.utils;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
-@Repository("genericRepository")
-public interface GenericRepository<T extends Object> extends JpaRepository<T, Integer> {
-
+@Repository
+public class GenericRepository<T> implements IGenericRepository<T> {
+	
+	@PersistenceContext
+	private EntityManager em;
+	private T type;
+	
+	public GenericRepository(T type) {
+		this.type = type;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T findByIdplantel(Integer id) {
+		return (T) em.createQuery("SELECT p FROM Plantel p WHERE p.idplantel = :idplantel", (Class<T>) type );
+	}
 }

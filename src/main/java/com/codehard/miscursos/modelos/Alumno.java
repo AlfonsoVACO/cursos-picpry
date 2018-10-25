@@ -56,7 +56,7 @@ public class Alumno implements Serializable {
     @Column(name = "apellidos")
     private String apellidos;
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
     @Basic(optional = false)
     @Column(name = "direccion")
     private String direccion;
@@ -160,11 +160,11 @@ public class Alumno implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

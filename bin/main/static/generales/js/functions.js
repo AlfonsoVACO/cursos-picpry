@@ -1,12 +1,16 @@
-//jQuery.getScript("./generales/requester/Validacion.js", function(){
-	
+	var successColor ={
+		    "border-bottom": "solid 1px #ddd"
+	};
+	var errorColor ={
+		    "border-bottom": "solid 1px red"
+	}
 	var objectSend = {
 		type : "null",
 		url : "null",
 		data: {},
 		cache : false,
 		success : function( response ) {
-			console.log( response );
+			// console.log( response );
 			getSuccessfulMessage();
 		},
 		error : function ( XMLHttpRequest, textStatus, errorthrows ){
@@ -14,31 +18,31 @@
 		}
 	};
 	
+	function getListElements(){
+		var lstInputs = $(".valid-errors").find("input");
+		var lstSelects = $(".valid-errors").find("select");
+		lstInputs.push(lstSelects);
+		return lstInputs;
+	}
+	
 	function sendData( idElement ) {
-		var lstElements = $(".valid-errors").find("input");
-		var lstStringscmd = $(idElement).attr("data-list-str");
-		var arraryString = lstStringscmd.split(",");
+		var lstElements = getListElements();
+		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
+		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
 		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
 		if( validate( idElement, lstElements, arraryString )  ){
 			var objetoAdmin = convertToObject(
 					lstElements.filter(function( item ){
-						return listSend( idElement ).includes( $(this).attr("id") ) ? false : true;
+						return $(this).attr("data-noset") != undefined ? false : true;
 					}), 
 					reduce
 			);
-			var ulrString = "";
-			for(var i = 0; i < arraryString.length; i++){
-				var cadena = arraryString[i].substring(reduce, arraryString[i].length);
-				ulrString += cadena + "="+ $("#"+arraryString[i]).val() + "?";
-			}
-			
+			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
 			if(getPasswordinArray()){
 				setActionMethod( idElement, objetoAdmin, ulrString.substring( 0, (ulrString.length -1) ) );
-				
 				if( $(idElement).attr("data-onclear") == "true"){
 					clearFElements( idElement );
 					clearList(arraryString);
-					console.log( objectSend.url );
 				}
 			}else{
 				getErrorMessage("Los campos contraseñas deben coincidir");
@@ -47,35 +51,28 @@
 	
 	}
 	
-	function getPasswordinArray(){
-		var listpass = $("form").find("input").filter(function( item ){
-			return "password" == $(this).attr("type") ? true : false;
-		});
-		
-		if(listpass.length == 2){
-			var cadenassh = "";
-			var item = 0;
-			var valid = 0;
-			$.each(listpass,function(key, value){
-				if( item != 0 ){
-					if(cadenassh == $(value).val()){
-						return true;
-					}
-				}else{
-					cadenassh = $(value).val();
-					item++;
-				}
-			});
-			return  false;
+	function getNewsStrings(arraryString, reduce){
+		var ulrString = "";
+		for(var i = 0; i < arraryString.length; i++){
+			var cadena = arraryString[i].substring(reduce, arraryString[i].length);
+			ulrString += cadena + "="+ $("#"+arraryString[i]).val() + "?";
 		}
-		
+		return ulrString;
+	}
+	
+	function getPasswordinArray(){
+		var listpass = $(".form").find("input[type='password']");
+		if(listpass.length == 2){
+			if($(listpass[0]).val() != $(listpass[1]).val() ) 
+				return false
+		}		
 		return true;
 		
 	}
 	
 	function clearFElements( idElement ){
 		clearElements($(".valid-errors").find("input").filter(function( item ){
-			return listValid( idElement).includes( $(this).attr("id") ) ? false : true;
+			return $(this).attr("data-cleable") != undefined ? false : true;
 		}));
 	}
 	
@@ -233,30 +230,22 @@
 	        });
 	    	if( $(idElement).attr("data-onclear") == "true"){
 				clearElements($(".valid-errors").find("input").filter(function( item ){
-					return listValid( idElement).includes( $(this).attr("id") ) ? false : true;
+					return $(this).attr("data-cleable") != undefined ? false : true;
 				}));
 			}
 	    }
 	    
 	});
-	
-	function listSend( idElement ){
-		return $(idElement).attr("data-onsend") != "[]" ? JSON.parse( $(idElement).attr("data-onsend") ) : [];
-	}
-	
-	function listValid( idElement ){
-		return $(idElement).attr("data-onvalid") != "[]" ? JSON.parse( $(idElement).attr("data-onvalid") ) : [];
-	}
-	
+		
 	function validate( idElement, lstElements, lstStrings ){
 		var result = onEmpty({
-			lstString: lstStrings,
-			normalStyle : { "border" : "solid 1px #eee" },
+			lstString: lstStrings != "" ? lstStrings : [],
+			normalStyle : successColor,
 			showErrors : true,
-			errorStyle : { "border" : "solid 1px red" },
+			errorStyle : errorColor,
 			otherConf : { "confemail" : false, "elements":true },
 			lstElements: lstElements.filter(function( item ){
-				return listValid( idElement ).includes( $(this).attr("id") ) ? false : true;
+				return $(this).attr("data-optional") != undefined ? false : true;
 				})
 		});
 		return result;
@@ -359,7 +348,6 @@
 		constructor(type,attributes,children){
 			super('div',{class:'modal-window'},[]);
 			Element.prototype.addChildren(this,[Element.prototype.createCustomElement(type,attributes,children)]);
-			console.log(this)
 			this.addEventListener('click',function(e){
 				if(e.target === this) Modal.prototype.closeModal.call(this);
 			});
@@ -369,7 +357,71 @@
 			document.body.removeChild(this);
 		}
 	}
-	
-	//function send
+		
+	function sendAjaxCodeZip( value ){
+		$.ajax({
+			type: "get",
+			url: "https://api-codigos-postales.herokuapp.com/v2/buscar",
+			data: { codigo_postal: value },
+			success: function(response){
+				$.get(
+					"https://api-codigos-postales.herokuapp.com/v2/codigo_postal/" + response.codigos_postales[0],
+					function( objeto ){
+						sendDataCode( objeto );
+					}
+				);
+			},
+			error: function ( XMLHttpRequest, textStatus, errorthrows ){
+				getErrorMessage( getCodeStatus( XMLHttpRequest, textStatus ) );
+			}
+		});
+	}
 
-//});
+	function sendDataCode( objeto ){
+		$("#idmaauns").html("Estado: <span>"+objeto.estado+"</span><br>Municipio: <span>"+objeto.municipio+"</span>");
+		$("#stridestado").val(objeto.estado);
+		$("#stridmunicipio").val(objeto.municipio);
+	}
+	
+	$(".zip").click(function(){
+		if ( $("#strcp").val().length == 0 ) return;
+		
+		var btnZIP = $(this);
+		var dondeBtnOk = $(this).attr("data-in");
+		
+		let mensaje = new Element('p',{class:'modal-window-text'},['¿Están correctos tus datos?']);		
+		let estado = new Element('p',{id:'idmaauns'},[] );		
+		let btnok = new Element('input',{ class: 'btn btn-default', type: 'button',style:'margin:4px', value:"Si" },[]);
+		let btnnot = new Element('input',{ class: 'btn btn-default', type: 'button',style:'margin:4px', value:"No" },[]);
+		
+		btnok.addEventListener('click',function(e){
+			$("#strcp").attr("disabled", true);
+			$("#"+dondeBtnOk).append( getButtonMain() );
+			$(".zip").remove();
+			$(".modal-window").remove();
+		});
+		
+		btnnot.addEventListener('click',function(e){
+			$("#strcp").attr("disabled", false);
+			$("#register-al").remove();
+			$(".modal-window").remove();
+		});
+		
+		let divbotones = new Element('div',{style:'display:block;float:center;position: relative;text-align: center;'},[btnok,btnnot ]);
+		
+		let e = new Modal('div',{class:'modal-window-content'},[ mensaje, estado, divbotones]);
+		document.body.appendChild(e);
+		sendAjaxCodeZip( $("#strcp").val() );
+	});
+	
+	function getButtonMain(){
+		return new Element('input',{ 
+			'type': 'button', 'id': 'register-al',
+			'onclick': 'sendData(this);',
+			'data-onclear': 'true',
+			'data-href-method': 'post',
+			'data-remain': '3',
+			'data-href-url': '/register', 'data-optional': '', 'data-noset': '',
+			'data-cleable': '', class: 'btn btn-primary align-right', 
+			'value': "Registrarse" },[]);
+	}

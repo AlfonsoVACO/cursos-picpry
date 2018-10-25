@@ -45,9 +45,9 @@ public class MapToClass <T>{
 					try {
 						Field field = clase.getDeclaredField(idnombre[0].toString());
 						field.setAccessible(true);
-						Integer id = Integer.parseInt( idnombre[1].toString() );
-						getClassTypeOrg(field, nombreclase.toString(), id);
-					} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+						//Integer id = Integer.parseInt( idnombre[1].toString() );
+						//getClassTypeOrg(field, nombreclase.toString(), id );
+					} catch (NoSuchFieldException | SecurityException | IllegalArgumentException  e) {
 						e.printStackTrace();
 					} 
 				}
@@ -113,8 +113,9 @@ public class MapToClass <T>{
 	private void getClassTypeOrg(Field field, String clase, Integer id) throws IllegalArgumentException, IllegalAccessException {
 		switch(clase) {
 		case "Plantel":
-			GetInAllRepo<Plantel> plantel = new GetInAllRepo<>(new Plantel());
-			field.set(this.objClass, plantel.getClassById(id));
+			//GenericRepository<Plantel> plantel = new GenericRepository<>(new Plantel());
+			//System.out.println(plantel.findByIdplantel(id));
+			//field.set(this.objClass, plantel.findByIdplantel(id));
 			break;
 			default: break;
 		}

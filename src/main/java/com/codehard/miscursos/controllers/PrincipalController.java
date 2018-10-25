@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codehard.miscursos.modelos.Alumno;
+import com.codehard.miscursos.modelos.Estados;
+import com.codehard.miscursos.modelos.Municipios;
 import com.codehard.miscursos.modelos.Plantel;
 import com.codehard.miscursos.repositories.PlantelReporitory;
 import com.codehard.miscursos.services.PlantelServiceImp;
@@ -51,11 +53,17 @@ public class PrincipalController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {		
+	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {
+		lstproduct.forEach((k,v)->{
+			System.out.println(k+" => "+v);
+		});
+		
 		MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
 		
 		Map<Object, JpaRepository> mapasRepo = new HashMap<>();
 		mapasRepo.put(new Plantel(), plantelRepository);
+		mapasRepo.put(new Estados(), plantelRepository);
+		mapasRepo.put(new Municipios(), plantelRepository);
 		
 		objAlumno.setConfiguration( lstproduct, mapasRepo, "com.codehard.miscursos.modelos" );
 		
