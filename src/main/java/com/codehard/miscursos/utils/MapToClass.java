@@ -4,10 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.codehard.miscursos.modelos.Plantel;
-
 public class MapToClass <T>{
 	
 	private T objClass;
@@ -15,45 +11,18 @@ public class MapToClass <T>{
 	private Map<Object,Object[]> lstIdesExternos;
 	private String packages;
 	
-	@SuppressWarnings("rawtypes")
-	private Map<Object, JpaRepository> mapasRepo;
-	
 	public MapToClass(T clase) {
 		this.objClass = clase;
 	}
-	
-	@SuppressWarnings("rawtypes")
-	public void setConfiguration(
-			Map<String,Object> mapa, 
-			Map<Object, JpaRepository> mapasRepo,
-			String packages) {
-		
+
+	public void setConfiguration( Map<String,Object> mapa, String packages) {		
 		this.lstIdesExternos = new HashMap<>();
 		this.mapa = mapa;
 		this.packages = packages;
-		this.mapasRepo = mapasRepo;
 	}
 
-	public void getTogas() {
-		this.mapasRepo.forEach( ( k , v )->{
-			lstIdesExternos.forEach( (nombreclase, idnombre) ->{
-				//System.out.println(k.toString());
-				//System.out.println(k.getClass().toString());				
-				if(k.getClass().getSimpleName().equals(nombreclase)) {
-					Class<? extends Object> clase = objClass.getClass();
-					System.out.println(nombreclase +" => " +idnombre[0].toString() + " => "+idnombre[1].toString());
-					try {
-						Field field = clase.getDeclaredField(idnombre[0].toString());
-						field.setAccessible(true);
-						//Integer id = Integer.parseInt( idnombre[1].toString() );
-						//getClassTypeOrg(field, nombreclase.toString(), id );
-					} catch (NoSuchFieldException | SecurityException | IllegalArgumentException  e) {
-						e.printStackTrace();
-					} 
-				}
-			});
-			
-		});
+	public Map<Object, Object[]> getTogas() {
+		return lstIdesExternos;
 	}
 	
 	public T getClassMap() {
@@ -78,7 +47,6 @@ public class MapToClass <T>{
 			}
 		});
 		
-		getTogas();
 		return this.objClass;
 	}
 	
@@ -109,16 +77,4 @@ public class MapToClass <T>{
 			return value.toString();
 		}
 	}
-	
-	private void getClassTypeOrg(Field field, String clase, Integer id) throws IllegalArgumentException, IllegalAccessException {
-		switch(clase) {
-		case "Plantel":
-			//GenericRepository<Plantel> plantel = new GenericRepository<>(new Plantel());
-			//System.out.println(plantel.findByIdplantel(id));
-			//field.set(this.objClass, plantel.findByIdplantel(id));
-			break;
-			default: break;
-		}
-	}
-	
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.codehard.miscursos.modelos.Estados;
@@ -30,6 +31,11 @@ public class EstadosServiceImp {
 
 	public Estados editEstados(Estados estados) {
 		return estadosRepository.saveAndFlush(estados);
+	}
+	
+	public Estados getEstdoByCriteria(Example<Estados> example) {
+		Optional<Estados> isNull = estadosRepository.findOne(example);
+		return isNull.isPresent() ? isNull.get(): new Estados();
 	}
 
 	public void deleteEstados(Integer id) {

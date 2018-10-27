@@ -10,7 +10,7 @@
 		data: {},
 		cache : false,
 		success : function( response ) {
-			// console.log( response );
+			console.log( response );
 			getSuccessfulMessage();
 		},
 		error : function ( XMLHttpRequest, textStatus, errorthrows ){
@@ -20,8 +20,10 @@
 	
 	function getListElements(){
 		var lstInputs = $(".valid-errors").find("input");
-		var lstSelects = $(".valid-errors").find("select");
-		lstInputs.push(lstSelects);
+		var lstSelect = $(".valid-errors").find("select");
+		for (var i = 0 ; i < lstSelect.length; i++){
+			lstInputs.push(lstSelect[i]);
+		}
 		return lstInputs;
 	}
 	
@@ -30,6 +32,7 @@
 		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
 		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
 		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
+		console.log(lstElements);
 		if( validate( idElement, lstElements, arraryString )  ){
 			var objetoAdmin = convertToObject(
 					lstElements.filter(function( item ){
@@ -37,6 +40,8 @@
 					}), 
 					reduce
 			);
+			
+			console.log(objetoAdmin);
 			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
 			if(getPasswordinArray()){
 				setActionMethod( idElement, objetoAdmin, ulrString.substring( 0, (ulrString.length -1) ) );

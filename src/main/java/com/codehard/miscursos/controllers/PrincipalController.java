@@ -1,13 +1,11 @@
 package com.codehard.miscursos.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codehard.miscursos.modelos.Alumno;
 import com.codehard.miscursos.modelos.Estados;
 import com.codehard.miscursos.modelos.Municipios;
-import com.codehard.miscursos.modelos.Plantel;
-import com.codehard.miscursos.repositories.PlantelReporitory;
+import com.codehard.miscursos.modelos.Roles;
+import com.codehard.miscursos.services.EstadosServiceImp;
+import com.codehard.miscursos.services.MunicipiosServiceImp;
 import com.codehard.miscursos.services.PlantelServiceImp;
+import com.codehard.miscursos.services.RolesServiceImp;
+import com.codehard.miscursos.utils.ExamplesClass;
 import com.codehard.miscursos.utils.MapToClass;
 
 @Controller
@@ -36,8 +37,16 @@ public class PrincipalController {
 	public PlantelServiceImp plantelServiceImp;
 	
 	@Autowired
-	@Qualifier("plantelRepository")
-	public PlantelReporitory plantelRepository;
+	@Qualifier("servicioEstados")
+	public EstadosServiceImp estadosServiceImp;
+	
+	@Autowired
+	@Qualifier("servicioMunicipios")
+	public MunicipiosServiceImp municipiosServiceImp;
+	
+	@Autowired
+	@Qualifier("servicioRoles")
+	public RolesServiceImp rolesServiceImp;
 	
 	@GetMapping("/")
     public String index(Model model) {
@@ -50,26 +59,38 @@ public class PrincipalController {
         return "alumno/login";
     }
 	
-	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) {
-		lstproduct.forEach((k,v)->{
-			System.out.println(k+" => "+v);
-		});
+	public Alumno setRegister(@RequestParam(defaultValue="0") Map<String,Object> lstproduct) 
+			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		
 		MapToClass<Alumno> objAlumno = new MapToClass<>(new Alumno());
+		objAlumno.setConfiguration( lstproduct, "com.codehard.miscursos.modelos" );		
+		Alumno alumno = objAlumno.getClassMap();
+		Map< Object, Object[] > claves = objAlumno.getTogas();
 		
-		Map<Object, JpaRepository> mapasRepo = new HashMap<>();
-		mapasRepo.put(new Plantel(), plantelRepository);
-		mapasRepo.put(new Estados(), plantelRepository);
-		mapasRepo.put(new Municipios(), plantelRepository);
+		ExamplesClass<Estados> examplesEstados = new ExamplesClass<>(new Estados(), 
+				new Object[] {"nombre", claves.get("Estados")[1] });
+		ExamplesClass<Municipios> examplesMunicip = new ExamplesClass<>(new Municipios(), 
+				new Object[] {"nombre", claves.get("Municipios")[1] });
 		
-		objAlumno.setConfiguration( lstproduct, mapasRepo, "com.codehard.miscursos.modelos" );
+		Estados estado = estadosServiceImp.getEstdoByCriteria(examplesEstados.getExample());
+		Municipios municipio = municipiosServiceImp.getMunicipioByCriteria(examplesMunicip.getExample());
 		
-		System.out.println(objAlumno.getClassMap());
+		Estados nuevoestado = estado.getIdestado() == null ? estadosServiceImp.addEstados( new Estados( claves.get("Estados")[1].toString() ) ) : estado;
+		Municipios nuevomunici =municipio.getIdmunicipio() == null ? municipiosServiceImp.addMunicipios( new Municipios( claves.get("Municipios")[1].toString() ) ) : municipio;
 		
-        return new Alumno();
+		Roles rol = rolesServiceImp.getRolesById(4).get();
+		System.out.println(alumno);
+		//System.out.println(plantel);
+		
+		System.out.println(nuevoestado);
+		System.out.println(nuevomunici);
+		System.out.println(rol);
+		
+		//alumno.setIdplantel( plantel );
+		
+        return alumno;
     }
 	
 	@GetMapping("/access-denied")

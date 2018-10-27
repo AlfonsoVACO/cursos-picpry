@@ -49,6 +49,10 @@ public class Estados implements Serializable {
     public Estados(Integer idestado) {
         this.idestado = idestado;
     }
+    
+    public Estados(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Estados(Integer idestado, String nombre) {
         this.idestado = idestado;
