@@ -14,8 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "archivos", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -40,7 +38,6 @@ public class Archivos implements Serializable {
     private String extension;
     @JoinColumn(name = "idrecurso", referencedColumnName = "idrecurso")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Recursos idrecurso;
 
     public Archivos() {

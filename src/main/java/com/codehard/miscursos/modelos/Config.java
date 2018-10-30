@@ -8,13 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "config", catalog = "esccursos", schema = "")
@@ -23,8 +22,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
     @NamedQuery(name = "Config.findAll", query = "SELECT c FROM Config c")
     , @NamedQuery(name = "Config.findByIdconfig", query = "SELECT c FROM Config c WHERE c.idconfig = :idconfig")
     , @NamedQuery(name = "Config.findByColor", query = "SELECT c FROM Config c WHERE c.color = :color")
-    , @NamedQuery(name = "Config.findByTipoletra", query = "SELECT c FROM Config c WHERE c.tipoletra = :tipoletra")
-    , @NamedQuery(name = "Config.findByOtro", query = "SELECT c FROM Config c WHERE c.otro = :otro")})
+    , @NamedQuery(name = "Config.findByTipoletra", query = "SELECT c FROM Config c WHERE c.tipoletra = :tipoletra")})
 public class Config implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,15 +35,14 @@ public class Config implements Serializable {
     private String color;
     @Column(name = "tipoletra")
     private String tipoletra;
+    @Lob
     @Column(name = "otro")
     private String otro;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Plantel idplantel;
 
     public Config() {
@@ -53,13 +50,6 @@ public class Config implements Serializable {
 
     public Config(Integer idconfig) {
         this.idconfig = idconfig;
-    }
-
-    public Config(Integer idconfig, String color, String tipoletra, String otro) {
-        this.idconfig = idconfig;
-        this.color = color;
-        this.tipoletra = tipoletra;
-        this.otro = otro;
     }
 
     public Integer getIdconfig() {

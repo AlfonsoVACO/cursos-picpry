@@ -19,9 +19,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "temas", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -45,14 +42,11 @@ public class Temas implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtema")
-    @JsonManagedReference
     private List<Videos> videosList;
     @JoinColumn(name = "idcurso", referencedColumnName = "idcurso")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Cursos idcurso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtema")
-    @JsonManagedReference
     private List<Recursos> recursosList;
 
     public Temas() {
