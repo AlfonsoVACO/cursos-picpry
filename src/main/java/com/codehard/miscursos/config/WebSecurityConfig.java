@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/profesor/**","/register/add").permitAll();
 		http.authorizeRequests().antMatchers("/profes/**").access("hasAnyRole('ROLE_ROOT', 'ROLE_PROFE')");
 		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ROOT', 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/me/**").access("hasAnyRole('ROLE_ROOT', 'ROLE_ADMIN', 'ROLE_ALUMN', 'ROLE_PROFE')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/access-denied");
 		http.authorizeRequests().and().formLogin().loginProcessingUrl("/inlogin")
 		.loginPage("/login").defaultSuccessUrl("/")

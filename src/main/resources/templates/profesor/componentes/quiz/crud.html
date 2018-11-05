@@ -1,0 +1,115 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<title>Quiz</title>
+	<head th:replace="profesor/includes/header :: header"></head>
+    <body>
+        <div class="wrapper">
+        	<style type="text/css">
+	  			input[type='time']::-webkit-datetime-edit-ampm-field { display: none;}
+	  		</style>
+            <div th:replace="profesor/includes/menu :: menuslip"></div>
+            <div class="main-panel">
+                <nav th:replace="profesor/includes/menu :: navega"></nav>
+                <div class="content">
+                	<div class="row">
+	                	<div class="col-md-6">
+	                		<div class="container-fluid" >
+		                        <div class="row">
+		                            <div class="col-md-12">
+		                                <div class="card">
+		                                    <div class="header">
+		                                        <h4 class="title">Mis preguntas</h4>
+		                                    </div>
+		                                    <div class="content">
+		                                        <ul id="listQuest"></ul>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<div class="container-fluid">
+		                        <div class="row">
+		                            <div class="col-md-12">
+		                                <div class="card">
+		                                    <div class="header">
+		                                        <h4 class="title">Mis Quizes</h4>
+		                                    </div>
+		                                    <div class="content">
+		                                        <div class="row">
+													<div class="col-md-5">
+														<select id="typeOption" class="form-control">
+															<option value="radio">Seleccion radio</option>
+															<option value="checkbox">Seleccion check</option>
+														</select>
+													</div>
+												</div>
+												<br>
+												<textarea class="form-control" id="question" placeholder="Pregunta"></textarea>
+												<br>
+												<div>
+													<input type="button" class="btn btn-info" id="more" value="+"/>
+													<form>
+														<div id="lst"></div>
+														<br>
+														<div class="form-group">
+															<textarea class="form-control" id="messages" placeholder="Algun mensaje"></textarea>
+														</div>
+														<div class="form-group mainForce">
+															<input type="button" class="btn btn-warning" id="clear" value="Limpiar"/>
+															<input type="button" class="btn btn-primary" id="add" value="Agregar"/>
+															<input type="button" class="btn btn-success" id="end" data-toggle="modal" data-target="#exampleModal" value="Configuraci&oacute;n"/>
+														</div>
+													</form>
+												</div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+	                	</div>
+                	</div>                    
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid"></div>
+                </footer>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Configuraci&oacute;n</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label><input type="checkbox" id="aleatorio"/> Preguntas aleatorias</label>
+							</div>
+							<div class="form-group times">
+								<label><input type="checkbox" id="times"/> Agregar un tiempo</label>
+							</div>
+							<div class="form-group">
+								<label>Cantidad de preguntas a mostrar<input type="number" id="cantidadmuestra" min="1" value="1" class="form-control"/></label>
+							</div>
+							<div class="form-group intento">
+								<label><input type="checkbox" id="intento"/> Agregar intentos m&aacute;ximos</label>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
+						<button type="button" class="btn btn-primary" id="saveConfig">Guardar cambios</button>
+					</div>
+				</div>
+			</div>
+		</div>
+    </body>
+    <div th:replace="profesor/includes/script :: scripts"></div>
+    <script type="text/javascript" th:src="@{/generales/quiz/Question.js}"></script>
+  	<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
+</html>

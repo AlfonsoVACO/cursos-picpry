@@ -80,6 +80,8 @@ public class Alumno implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Otrospagos> otrospagosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    private List<Registroquiz> registroquizList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Calificacion> calificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Proyecto> proyectoList;
@@ -312,6 +314,15 @@ public class Alumno implements Serializable {
 
     public void setOtrospagosList(List<Otrospagos> otrospagosList) {
         this.otrospagosList = otrospagosList;
+    }
+    
+    @XmlTransient
+    public List<Registroquiz> getRegistroquizList() {
+        return registroquizList;
+    }
+
+    public void setRegistroquizList(List<Registroquiz> registroquizList) {
+        this.registroquizList = registroquizList;
     }
     
     public Grupo getIdgrupo() {

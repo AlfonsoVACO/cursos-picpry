@@ -8,7 +8,7 @@
 			<header th:replace="alumno/includes/header :: header-menu"></header>
 			<div th:replace="alumno/includes/header :: header-movil"></div>
 			<div class="border-back">
-				<img src="http://www.educacionpersonal.com/edupersonal/theme/image.php/campus/theme/1528969453/background" class="img-wall"/>
+				<img th:src="@{/alumno/img/background.png}" class="img-wall"/>
 			</div>
 
       <div class="section">
@@ -30,22 +30,16 @@
                   <div class="col-md-12">
                     <form>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre</label>
-                                    <input type="text" class="form-control-text" id="strnombre" name="strnombre">
+                                    <input type="text" class="form-control-text" th:value="${alumnolog.nombre}" id="strnombre" name="strnombre">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Apellido materno</label>
-                                    <input type="text" class="form-control-text" id="strapellidom" name="strapellidom">
-                                </div>
-                            </div>
-														<div class="col-md-4">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Apellido paterno</label>
-                                    <input type="text" class="form-control-text" id="strapellidop" name="strapellidop">
+                                    <label class="control-label">Apellidos</label>
+                                    <input type="text" class="form-control-text"  th:value="${alumnolog.apellidos}" id="strapellidop" name="strapellidop">
                                 </div>
                             </div>
                         </div>
@@ -53,33 +47,27 @@
                         	<div class="col-md-3">
                                 <div class="form-group label-floating">
                                     <label class="control-label">CP</label>
-                                    <input type="text" class="form-control-text data-numeric" maxlength="5" id="strcp" name="strcp">
+                                    <input type="text" class="form-control-text data-numeric"  th:value="${alumnolog.cp}" maxlength="5" id="strcp" name="strcp">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Calle y número</label>
-                                    <input type="text" class="form-control-text" id="strdireccion" name="strdireccion">
+                                    <input type="text" class="form-control-text" id="strdireccion" name="strdireccion"  th:value="${alumnolog.direccion}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                        	<div class="col-md-4">
+                        	<div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Estado</label>
                                     <input type="text" disabled class="form-control-text" id="strEstado" name="strEstado">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Municipio</label>
                                     <input type="text" disabled class="form-control-text" id="strMunicipio" name="strMunicipio">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Colonia</label>
-                                    <select class="form-control-text" id="strColonia"></select>
                                 </div>
                             </div>
                         </div>
@@ -87,30 +75,16 @@
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Correo</label>
-                                    <input type="email" class="form-control-text" id="strcorreo" name="strcorreo">
+                                    <input type="email" class="form-control-text" id="strcorreo" name="strcorreo"  th:value="${alumnolog.correo}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Teléfono</label>
-                                    <input type="tel" class="form-control-text data-numeric" maxlength="10" id="strtelefono" name="strtelefono">
+                                    <input type="tel" class="form-control-text data-numeric" maxlength="10" id="strtelefono" name="strtelefono"  th:value="${alumnolog.telefono}">
                                 </div>
                             </div>
                         </div>
-												<div class="row">
-													<div class="col-md-6">
-															<div class="form-group label-floating">
-																	<label class="control-label">Tutor</label>
-																	<input type="text" class="form-control-text" id="strtutor" name="strtutor">
-															</div>
-													</div>
-													<div class="col-md-6">
-															<div class="form-group label-floating">
-																	<label class="control-label">Teléfono de tutor</label>
-																	<input type="tel" class="form-control-text data-numeric" maxlength="10" id="strteltutor" name="strteltutor">
-															</div>
-													</div>
-												</div>
                         <input type="button" id="updtInfop" class="btn btn-primary pull-right" value="Actualiza mi usuario" />
                         <div class="clearfix"></div>
                     </form>
@@ -140,7 +114,7 @@
     			</button>
 		</div>
 		<div th:replace="alumno/includes/script :: scripts"></div>
-		<script th:src="@{/alumno/js/funtions.js}"></script>
+		<!-- <script th:src="@{/alumno/js/funtions.js}"></script>
 		<script type="text/javascript" th:src="@{/alumno/js/errores.js}"></script>
 		<script type="text/javascript">
 			$("#updtInfop").click(function(){
@@ -160,6 +134,6 @@
 					}));
 				}
 			});
-		</script>
+		</script>-->
 	</body>
 </html>
