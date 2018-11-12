@@ -1,7 +1,7 @@
 var objQuiz = new Quiz(listQuestions);
 var lista = objResource.getNewArray(10, objQuiz.getObject() );	
 var lstresp = []; 
-var id = 0;
+var id = 1;
 
 $.each(lista,function( k , v ){
 	var btn = new Element('button',{type:'button',class:'btn btn-info', 'data-in':k },[ (k+1) ] );
@@ -104,18 +104,18 @@ function setReact( position ){
 		$.each(listaDivs,function(key,value){
 			if( $(value).is(":checked") ) lstresp[position - 1].answers.push(key);
 		});
-		$("button[data-in="+(position -1)+"]").removeClass("btn btn-info");
-		$("button[data-in="+(position -1)+"]").addClass("btn btn-success");
+		//$("button[data-in="+(position -1)+"]").removeClass("btn btn-info");
+		//$("button[data-in="+(position -1)+"]").addClass("btn btn-success");
 	}else{
 		if( position == 0) position++;
 		$.each(lstresp[position -1].answers,function(key,value){ lstresp[position -1].answers.pop(); });
-		$("button[data-in="+(position -1)+"]").removeClass("btn btn-success");
-		$("button[data-in="+(position -1)+"]").addClass("btn btn-info");
+		//$("button[data-in="+(position -1)+"]").removeClass("btn btn-success");
+		//$("button[data-in="+(position -1)+"]").addClass("btn btn-info");
 	}
 }
 
 var segundos=200;
-/*function countDown(){
+function countDown(){
 	var minutes = Math.round( (segundos-30) /60);
 	var remain = segundos % 60;
 	if(remain<1) remain = "0";
@@ -126,7 +126,7 @@ var segundos=200;
 		sendParse();
 	}else segundos--;
 }
-var countTimer = setInterval(countDown,1000);*/
+var countTimer = setInterval(countDown,1000);
 
 function sendParse(){
 	var cadena = "";
@@ -139,6 +139,7 @@ function sendParse(){
 		if(lstresp.length != k) cadena += ":";
 	});
 	cadena = cadena.substring(0, cadena.length - 1);
+	console.log(lstresp);
 	setDataEnd(new Registroquiz(lista.length,0,(lista.length / 100),cadena, document.getElementById("timer").innerHTML, lstresp));
 }
 
