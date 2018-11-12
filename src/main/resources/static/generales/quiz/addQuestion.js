@@ -139,6 +139,7 @@ function setList( ){
 		countListObj++;
 		listQuest.appendChild(li);
 	});
+	console.log(listQuestions);
 }
 $("#times").click(function(){
 	if( $(this).is(":checked") )

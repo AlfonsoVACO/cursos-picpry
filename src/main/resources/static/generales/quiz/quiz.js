@@ -2,10 +2,12 @@ var objQuiz = new Quiz(listQuestions);
 var lista = objResource.getNewArray(10, objQuiz.getObject() );	
 var lstresp = []; 
 var id = 1;
+var itempos = 0;
 
 $.each(lista,function( k , v ){
 	var btn = new Element('button',{type:'button',class:'btn btn-info', 'data-in':k },[ (k+1) ] );
 	btn.addEventListener("click", function(){ // click en item de
+		setReactInSelected( k );
 		getQuestion(v.options, v.type, v.q, k);
 	});
 	$("#itemslist").append(btn);
@@ -93,9 +95,38 @@ $("#btnnextFin").click(function(){
 
 function getAction(elment){
 	var position = parseInt($(elment).attr("data-on"));
-	setReact( position );
+	setReactBef( position );
 	getQuestion( lista[position].options, lista[position].type, lista[position].q, position );
 };
+
+function setReactInSelected( position ){
+	if( $(".contextual").find("input[id*=ans]").filter(function(index,item){ console.log($(item)); return $(item).is(":checked") ? true: false; }).length > 0  ){
+		$.each(lstresp[position ].answers,function(key,value){ lstresp[position ].answers.pop(); });
+		var listaDivs = $(".contextual").find("input[id*=ans]");
+		$.each(listaDivs,function(key,value){
+			if( $(value).is(":checked") ) lstresp[position ].answers.push(key);
+		});
+		console.log("Había seleccionadas");
+	}else{
+		//if( position == 0) position++;
+		console.log("No había seleccionadas");
+		$.each(lstresp[position].answers,function(key,value){ lstresp[position].answers.pop(); });
+	}
+	//getQuestion( lista[position].options, lista[position].type, lista[position].q, position );
+}
+
+function setReactBef( position ){
+	if( $(".contextual").find("input[id*=ans]").filter(function(item){ return $(this).is(":checked") ? true: false; }).length > 0  ){
+		$.each(lstresp[position +1 ].answers,function(key,value){ lstresp[position +1 ].answers.pop(); });
+		var listaDivs = $(".contextual").find("input[id*=ans]");
+		$.each(listaDivs,function(key,value){
+			if( $(value).is(":checked") ) lstresp[position + 1].answers.push(key);
+		});
+	}else{
+		//if( position == 0) position++;
+		$.each(lstresp[position +1].answers,function(key,value){ lstresp[position +1].answers.pop(); });
+	}
+}
 
 function setReact( position ){
 	if( $(".contextual").find("input[id*=ans]").filter(function(item){ return $(this).is(":checked") ? true: false; }).length > 0  ){
@@ -104,18 +135,14 @@ function setReact( position ){
 		$.each(listaDivs,function(key,value){
 			if( $(value).is(":checked") ) lstresp[position - 1].answers.push(key);
 		});
-		//$("button[data-in="+(position -1)+"]").removeClass("btn btn-info");
-		//$("button[data-in="+(position -1)+"]").addClass("btn btn-success");
 	}else{
 		if( position == 0) position++;
 		$.each(lstresp[position -1].answers,function(key,value){ lstresp[position -1].answers.pop(); });
-		//$("button[data-in="+(position -1)+"]").removeClass("btn btn-success");
-		//$("button[data-in="+(position -1)+"]").addClass("btn btn-info");
 	}
 }
 
 var segundos=200;
-function countDown(){
+/*function countDown(){
 	var minutes = Math.round( (segundos-30) /60);
 	var remain = segundos % 60;
 	if(remain<1) remain = "0";
@@ -126,7 +153,7 @@ function countDown(){
 		sendParse();
 	}else segundos--;
 }
-var countTimer = setInterval(countDown,1000);
+var countTimer = setInterval(countDown,1000);*/
 
 function sendParse(){
 	var cadena = "";
