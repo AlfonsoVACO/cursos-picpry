@@ -7,9 +7,9 @@
         	<style type="text/css">
 	  			input[type='time']::-webkit-datetime-edit-ampm-field { display: none;}
 	  		</style>
-            <div th:replace="profesor/includes/menu :: menuslip"></div>
+            
             <div class="main-panel">
-                <nav th:replace="profesor/includes/menu :: navega"></nav>
+                <!-- <nav th:replace="profesor/includes/menu :: navega"></nav>-->
                 <div class="content">
                 	<div class="row">
 	                	<div class="col-md-6">
@@ -22,6 +22,7 @@
 		                                    </div>
 		                                    <div class="content">
 		                                        <ul id="listQuest"></ul>
+		                                        <div id="form-questionxlsx"></div>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -62,8 +63,17 @@
 															<input type="button" class="btn btn-success" id="end" data-toggle="modal" data-target="#exampleModal" value="Configuraci&oacute;n"/>
 														</div>
 													</form>
-													<input type="file" id="excelfile" onchange="ExportToTable()" />
-													<table id="exceltable"></table> 
+													<hr>
+													<form>
+														<div class="from-group">
+															<label>Nombre de cabeceras (separados por comas)</label>
+															<input type="text" data-colrow class="form-control"/>
+														</div>
+														<br>
+														<div class="from-group">
+															<input type="file" data-importxls onchange="ExportToTable()" />
+														</div>
+													</form>
 												</div>
 		                                    </div>
 		                                </div>
@@ -116,72 +126,7 @@
     <script type="text/javascript" th:src="@{/generales/quiz/Question.js}"></script>
   	<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
   	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>  
-  	<script type="text/javascript">
-  	function ExportToTable() {  
-  	     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;    
-  	     if (regex.test($("#excelfile").val().toLowerCase())) {  
-  	         var xlsxflag = false;  
-  	         if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) xlsxflag = true;
-  	         
-  	         if (typeof (FileReader) != "undefined") {  
-  	             var reader = new FileReader();  
-  	             reader.onload = function (e) {  
-  	                 var data = e.target.result;
-  	                 var workbook;
-  	                 xlsxflag == true ? workbook = XLSX.read(data, { type: 'binary' }) : workbook = XLS.read(data, { type: 'binary' });
-  	                 
-  	                 var sheet_name_list = workbook.SheetNames;
-  	  
-  	                 var cnt = 0;  
-  	                 sheet_name_list.forEach(function (y) {
-  	                	var exceljson;
-  	                	xlsxflag == true ? exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]) : exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]) ;  
-  	                     
-  	                     if (exceljson.length > 0 && cnt == 0) {  
-  	                         BindTable(exceljson, '#exceltable');  
-  	                         cnt++;  
-  	                     }  
-  	                 });  
-  	                 $('#exceltable').show();  
-  	             }
-  	             xlsxflag == true ? reader.readAsArrayBuffer($("#excelfile")[0].files[0]) : reader.readAsBinaryString($("#excelfile")[0].files[0]);
-  	         }else  
-  	             alert("No soportado");  
-  	     } else
-  	         alert("Archivo inválido");
-  	 }  
-  	
-  	function BindTable(jsondata, tableid) {  
-  	     var columns = BindTableHeader(jsondata, tableid);  
-  	     for (var i = 0; i < jsondata.length; i++) {  
-  	         var row$ = $('<tr/>');  
-  	         for (var colIndex = 0; colIndex < columns.length; colIndex++) {  
-  	             var cellValue = jsondata[i][columns[colIndex]];  
-  	             if (cellValue == null)  
-  	                 cellValue = "";  
-  	             row$.append($('<td/>').html(cellValue));  
-  	         }  
-  	         $(tableid).append(row$);  
-  	     }  
-  	 }  
-  	 function BindTableHeader(jsondata, tableid) {  
-  	     var columnSet = [];  
-  	     var headerTr$ = $('<tr/>');  
-  	     for (var i = 0; i < jsondata.length; i++) {  
-  	         var rowHash = jsondata[i];  
-  	         for (var key in rowHash) {  
-  	             if (rowHash.hasOwnProperty(key)) {  
-  	                 if ($.inArray(key, columnSet) == -1) {  
-  	                     columnSet.push(key);  
-  	                     headerTr$.append($('<th/>').html(key));  
-  	                 }  
-  	             }  
-  	         }  
-  	     }  
-  	     $(tableid).append(headerTr$);  
-  	     return columnSet;  
-  	 }  
-  	</script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+  	<script type="text/javascript" th:src="@{/generales/quiz/loadexceltoform.js}"></script>
 </html>

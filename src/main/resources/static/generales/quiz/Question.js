@@ -10,6 +10,19 @@ var Question = /** @class */ (function () {
     }
     return Question;
 }());
+
+var QuestionXLSX = /** @class */ (function () {
+    function QuestionXLSX(question, options, answers, message, idquiz, type) {
+        this.question = question;
+        this.options = options;
+        this.answers = answers;
+        this.message = message;
+        this.idquiz = idquiz;
+		this.type = type;
+    }
+    return QuestionXLSX;
+}());
+
 var Answer = /** @class */ (function () {
     function Answer(idquestion, answers) {
         this.answers = answers;

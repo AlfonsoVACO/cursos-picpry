@@ -1,5 +1,5 @@
 var objQuiz = new Quiz(listQuestions);
-var lista = objResource.getNewArray(10, objQuiz.getObject() );	
+var lista = objResource.getNewArray(15, objQuiz.getObject() );	
 var lstresp = []; 
 var id = 1;
 var itempos = 0;
@@ -142,7 +142,7 @@ function setReact( position ){
 }
 
 var segundos=200;
-/*function countDown(){
+function countDown(){
 	var minutes = Math.round( (segundos-30) /60);
 	var remain = segundos % 60;
 	if(remain<1) remain = "0";
@@ -153,7 +153,7 @@ var segundos=200;
 		sendParse();
 	}else segundos--;
 }
-var countTimer = setInterval(countDown,1000);*/
+var countTimer = setInterval(countDown,1000);
 
 function sendParse(){
 	var cadena = "";
