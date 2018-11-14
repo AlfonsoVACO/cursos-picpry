@@ -100,6 +100,25 @@ var Resource = /** @class */ (function () {
 		return value;
 	}
 	
+	Resource.prototype.getCamposXLSX = function (arrreglo) {
+		var options = [];
+		var answers=[];
+		for(var i = 0; i < arrreglo.length; i++){
+			var checRadio = $(arrreglo[i]).find("input[id*=xlsxcorr]");
+			var input = $(arrreglo[i]).find("input[type='text']");
+			if( $(checRadio[0]).is(":checked") ) answers.push(i);
+			options.push( $(input).val() );
+		}
+		return [ options, answers ];
+	};
+	
+	Resource.prototype.getTypeXLSX = function (arrreglo) {
+		for(var i = 0; i < arrreglo.length; i++){
+			var checRadio = $(arrreglo[i]).find("input[id*=xlsxcorr]");
+			return $(checRadio[0]).attr("type");
+		}
+	};
+	
     return Resource;
 }());
 var Element = /** @class */ (function(){

@@ -89,9 +89,9 @@ function createForm( componets ){
 			var isCheck = isCorrectAnswer( value.answers, answers );  				
 			var radiocheck;
 			if(isCheck)
-				radiocheck = new Element('input',{type: value.type, checked: isCheck , id:'corrxlsx' + countListXLSX, onclick:'radioXLSX(this, "questdiv' + counquest+'")', value:'rad' + countListXLSX},[]);
+				radiocheck = new Element('input',{type: value.type, checked: isCheck , id:'xlsxcorr' + countListXLSX, onclick:'radioXLSX(this, "questdiv' + counquest+'")', value:'rad' + countListXLSX},[]);
 			else
-				radiocheck = new Element('input',{type: value.type, id:'corrxlsx' + countListXLSX, onclick:'radioXLSX(this, "questdiv' + counquest+'")', value:'rad' + countListXLSX},[]);
+				radiocheck = new Element('input',{type: value.type, id:'xlsxcorr' + countListXLSX, onclick:'radioXLSX(this, "questdiv' + counquest+'")', value:'rad' + countListXLSX},[]);
   					
 			answers++;
 			respuestas.appendChild( getElementCheckRad( radiocheck, countListXLSX, valueResp ) );
@@ -120,13 +120,16 @@ function setInForm( formulario, conenedor ){
 		var verificaCampos = true;
 		var verificaChecks = true;
 		$.each( $("#formloadXLSX").find("div[data-question]") , function(index, value){
-			if ( $(value).find("input[id*=corrxlsx]").filter(function(item){ return $(this).is(":checked") ? true: false; }).length  <= 0 ) verificaChecks = false;
+			if ( $(value).find("input[id*=xlsxcorr]").filter(function(item){ return $(this).is(":checked") ? true: false; }).length  <= 0 ) verificaChecks = false;
   					
 			var listaDivs = $(value).find("div[data-remxlsx]");
 			if ( !valueList.isEmptyList( listaDivs.find("input[type='text']") ) ) verificaCampos = false;
 		});
 		if(!verificaCampos) alert("Hay campos vac&iacute;os");
 		if(!verificaChecks) alert("Hay preguntas no marcadas (Debe de haber al menos una opci&oacute;n correcta)");
+		if( verificaCampos && verificaChecks ){
+			addToListQuestions();
+		}
 	});
 	formulario.appendChild(
 			new Element('div',{ class:'form-group'},[
@@ -134,6 +137,17 @@ function setInForm( formulario, conenedor ){
 				])
 	);
 	$("#form-questionxlsx").html(formulario);
+}
+
+function addToListQuestions(){
+	var objResource = new Resource();
+	$.each( $("#formloadXLSX").find("div[data-question]") , function(index, value){
+		var listaDivs = $(value).find("div[data-remxlsx]");
+		var opciones = objResource.getCamposXLSX( listaDivs );
+		var type = objResource.getTypeXLSX( listaDivs );
+		listQuestions.push( new Question($("#questionxlsx" + index).val(), opciones[0], opciones[1], "", 0, 0, type ) );
+	});
+	console.log(listQuestions);
 }
   		
 function isCorrectAnswer( lstAnswer, answers ){
