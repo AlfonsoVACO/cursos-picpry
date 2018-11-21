@@ -2,33 +2,77 @@ var objQuiz = new Quiz(listQuestions);
 var lista = objResource.getNewArray(15, objQuiz.getObject() );	
 var lstresp = []; 
 var id = 1;
+var typeview = false;
 var itempos = 0;
+var arrobjectElement = [];
 
-$.each(lista,function( k , v ){
-	var btn = new Element('button',{type:'button',class:'btn btn-info', 'data-in':k },[ (k+1) ] );
-	btn.addEventListener("click", function(){ // click en item de
-		setReactInSelected( k );
-		getQuestion(v.options, v.type, v.q, k);
+if(typeview){	
+	getQuizWizard();
+}else{
+	$(".clock").removeClass("col-md-6");
+	$(".plain").removeClass("col-md-6");
+	$(".plain").addClass("col-md-12");
+	$(".clock").css({
+	    "display": "block",
+	    "float": "left",
+	    "position": "fixed",
+	    "right": "50px",
+	    "bottom": "100px"
 	});
-	$("#itemslist").append(btn);
-	lstresp.push( new Answer(v.idquestion, []) );
-	
-	if( k == 0 ){
-		getQuestion(v.options, v.type, v.q, k);
-		$("#nextfinished").append( new Element('input',{type:'button',class:'btn btn-info', id:'btnnextFin', 'data-on': ( k + 1 ), value:'Siguiente' },[ ] ) );
-	}
-	
-});
+	$("#itemslist").remove();
+	$(".col-md-6").removeClass("col-md-6");
+	$("#itemquest").addClass("col-md-12");
+	deleteElements( [".clock", $(".container .row")[0] ] );
+	undoElements( [".container", ".container"] );
+	$(".container hr")[0].remove();
+	getQuizList();
+}
+
+function getQuizList(){
+	$.each(lista,function( k , v ){
+		lstresp.push( new Answer(v.idquestion, []) );
+		getQuestionInList(v.options, v.type, v.q, k, true);
+	});
+	$("#nextfinished").append( new Element('input',{type:'button',class:'btn btn-info',id:"btnfinlist", value:'Terminar' },[ ] ) );
+}
+
+function getQuizWizard(){
+	$.each(lista,function( k , v ){
+		var btn = new Element('button',{type:'button',class:'btn btn-info', 'data-in':k },[ (k+1) ] );
+		btn.addEventListener("click", function(){ // click en item de
+			setReactInSelected( k );
+			getQuestion(v.options, v.type, v.q, k, false);
+		});
+		$("#itemslist").append(btn);
+		lstresp.push( new Answer(v.idquestion, []) );
+		
+		if( k == 0 ){
+			getQuestion(v.options, v.type, v.q, k, false);
+			$("#nextfinished").append( new Element('input',{type:'button',class:'btn btn-info', id:'btnnextFin', 'data-on': ( k + 1 ), value:'Siguiente' },[ ] ) );
+		}
+		
+	});
+}
+
+function radioInList( idlst, element ){
+	var list = $("#"+idlst).find("input[type='radio']").filter(function(item){ return $(this).attr("id") == $(element).attr("id") ? false: true; });
+	$.each(list,function(i, elem){ $(elem).prop("checked", false); });
+}
 
 function radio( element ){
 	var list = $("#itemquest").find("input[type='radio']").filter(function(item){ return $(this).attr("id") == $(element).attr("id") ? false: true; });
 	$.each(list,function(i, elem){ $(elem).prop("checked", false); });
 }
 
-function getQuestion( options, type, q, k ){
-	$(".contextual").remove();
+function getTypeRadio( ishere, isList, id, type, key ){
+	if( ishere )
+		return new Element('input',{ type:type, onclick: isList ? 'radioInList(\'' + id + '\',this)':'radio(this)', id:'ans' + key, checked: ishere },[]);
+	else
+		return new Element('input',{ type:type, onclick: isList ? 'radioInList(\'' + id + '\',this)':'radio(this)', id:'ans' + key },[]);
+}
+
+function getQuestionInList( options, type, q, k , isList){
 	let respuestas =  new Element('div',{ class:'options' },[ ]);
-		
 	$.each(options, function(key, valu){
 		var ishere = false;
 		if( lstresp[k].answers.length > 0  ){
@@ -36,11 +80,7 @@ function getQuestion( options, type, q, k ){
 				if( valuel == key ) ishere = true;
 			});
 		}
-		var valuesCheck;
-		if( ishere )
-			valuesCheck = new Element('input',{ type:type, onclick:'radio(this)', id:'ans' + key, checked: ishere },[]);
-		else
-			valuesCheck = new Element('input',{ type:type, onclick:'radio(this)', id:'ans' + key },[]);
+		var valuesCheck = getTypeRadio(ishere, isList, 'idques'+k, type, key);
 		
 		respuestas.append( new Element('div',{ class:'form-row' },[
 			new Element('div',{ class:'col-auto', style:'padding:5px;' },[ valuesCheck ]),
@@ -49,13 +89,16 @@ function getQuestion( options, type, q, k ){
 			])
 		]));
 	});
-	
 	$("#itemquest").append(new Element('div',{ class:'contextual', id:'idques'+k },[ 
 		new Element('div',{ class:'question' },[ q,
 			new Element('div',{ class:'options' },[ respuestas ] )
 		] )
 	]));
-	
+}
+
+function getQuestion( options, type, q, k, isList ){
+	$(".contextual").remove();
+	getQuestionInList( options, type, q, k, isList );	
 	if( k > 0){
 		if($("#btnbefore").val() == undefined)
 			$("#before").append( new Element('input',{type:'button', class:'btn btn-info', id:'btnbefore',onclick:'getAction(this);', 'data-on': ( k - 1 ), value:'Anterior' },[ ] ) );
@@ -82,7 +125,7 @@ $("#btnnextFin").click(function(){
 	var position = parseInt($(this).attr("data-on"));
 	if( $(this).val() == "Siguiente" ){
 		setReact( position );
-		getQuestion( lista[position].options, lista[position].type, lista[position].q, position );
+		getQuestion( lista[position].options, lista[position].type, lista[position].q, position, false );
 	}else{
 		setReact( position +1 );
 		var resp = confirm("¿Está seguro de querer terminar el Quiz?");
@@ -96,7 +139,7 @@ $("#btnnextFin").click(function(){
 function getAction(elment){
 	var position = parseInt($(elment).attr("data-on"));
 	setReactBef( position );
-	getQuestion( lista[position].options, lista[position].type, lista[position].q, position );
+	getQuestion( lista[position].options, lista[position].type, lista[position].q, position,false );
 };
 
 function setReactInSelected( position ){
@@ -112,7 +155,7 @@ function setReactInSelected( position ){
 		console.log("No había seleccionadas");
 		$.each(lstresp[position].answers,function(key,value){ lstresp[position].answers.pop(); });
 	}
-	//getQuestion( lista[position].options, lista[position].type, lista[position].q, position );
+	//getQuestion( lista[position].options, lista[position].type, lista[position].q, position, false );
 }
 
 function setReactBef( position ){
@@ -123,7 +166,6 @@ function setReactBef( position ){
 			if( $(value).is(":checked") ) lstresp[position + 1].answers.push(key);
 		});
 	}else{
-		//if( position == 0) position++;
 		$.each(lstresp[position +1].answers,function(key,value){ lstresp[position +1].answers.pop(); });
 	}
 }
@@ -150,6 +192,7 @@ function countDown(){
 	document.getElementById("timer").innerHTML = minutes + ":" + remain;
 	if(segundos==0){
 		clearInterval(countTimer);
+		if(!typeview) takeList();
 		sendParse();
 	}else segundos--;
 }
@@ -170,6 +213,24 @@ function sendParse(){
 	setDataEnd(new Registroquiz(lista.length,0,(lista.length / 100),cadena, document.getElementById("timer").innerHTML, lstresp));
 }
 
+$("#btnfinlist").click(function(){
+	var resp = confirm("¿Está seguro de querer terminar el Quiz?");
+	if(resp == true){
+		takeList();
+		sendParse();
+		clearInterval(countTimer);
+	}
+});
+
+function takeList(){
+	$.each($("#itemquest").find(".contextual"),function(index, value){
+		var listaDivs = $(value).find("input[id*=ans]");
+		$.each(listaDivs,function(key,valuedivs){
+			if( $(valuedivs).is(":checked") ) lstresp[index].answers.push(key);
+		});
+	});
+}
+
 function setDataEnd(senddata){
 	$.ajax({
 		url:"/quizquest/edit/"+id,
@@ -183,4 +244,42 @@ function setDataEnd(senddata){
 			getErrorMessage( getCodeStatus( XMLHttpRequest, textStatus ) );
 		}
 	});
+}
+
+function undoElements( here ){
+	for ( var i = 0; i < arrobjectElement.length; i++ ){
+		var objAttr = {};
+		for ( var j = 0; j < arrobjectElement[i].attributes.length; j++ ){
+			$.each( Object.entries( arrobjectElement[i].attributes[j] ) ,function( key, value ){
+				objAttr[ value[0] ] = value[1];
+			});
+		}
+		$(here[i]).append(new Element(arrobjectElement[i].type, objAttr , arrobjectElement[i].children ));
+	}
+	arrobjectElement = [];
+}
+
+function deleteElements( lstElementsids ){
+	for ( var i = 0; i < lstElementsids.length; i++ ){		
+		arrobjectElement.push({
+			"type": $( lstElementsids[i] ).get(0).nodeName,
+			"attributes": getAttributes( $(lstElementsids[i] ) ),
+			"children": $( lstElementsids[i] ).children()
+		});
+		$(lstElementsids[i]).remove();
+	}
+}
+
+function getAttributes( element ){
+	var lstAttributes = [];
+	$(element).each(function() {
+	  $.each(this.attributes, function() {
+	    if(this.specified){
+				var objetoAttr={};
+				objetoAttr[this.name] = this.value;
+				lstAttributes.push(objetoAttr);
+			}
+	  });
+	});
+	return lstAttributes;
 }
