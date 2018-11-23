@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<title>Quiz</title>
+	<head th:replace="profesor/includes/header :: header"></head>
+    <body>        
+        <div class="wrapper">
+            <div th:replace="profesor/includes/menu :: menuslip"></div>
+            <div class="main-panel">
+                <nav th:replace="profesor/includes/menu :: navega"></nav>
+                <div class="content">
+                    <div class="container-fluid" id="menuResult">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Mis Quizes</h4>
+                                    </div>
+                                    <div class="content">
+                                        <table class="table">
+	                                        <thead>
+	                                        	<tr>
+	                                        		<th>Id</th>
+	                                        		<th>Grupo</th>
+	                                        		<th>No. quizes</th>
+	                                        		<th>Acciones</th>
+	                                        	</tr>
+	                                        </thead>
+	                                        <tbody>
+	                                        	<tr th:each="grupo : ${grupos}">
+	                                        		<td th:text="${grupo.id}"></td>
+	                                        		<td th:text="${grupo.idgrupo.nombre}"></td>
+	                                        		<td th:text="${grupo.idgrupo.quizList.size()}"></td>
+	                                        		<td>
+	                                        			<a href="quiz/create"  title="Agregar"><i class="pe-7s-more"></i></a>
+	                                        			<a title="Detalles"><i class="pe-7s-monitor"></i></a>
+	                                        			<a title="Editar"><i class="pe-7s-edit"></i></a>
+	                                        			<a title="Eliminar"><i class="pe-7s-trash"></i></a>
+	                                        		</td>
+	                                        	</tr>
+	                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid"></div>
+                </footer>
+
+            </div>
+        </div>
+    </body>
+    <div th:replace="profesor/includes/script :: scripts"></div>
+</html>

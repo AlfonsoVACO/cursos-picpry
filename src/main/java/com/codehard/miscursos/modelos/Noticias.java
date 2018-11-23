@@ -18,8 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "noticias", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -49,11 +47,9 @@ public class Noticias implements Serializable {
     private Date fecha;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Plantel idplantel;
 
     public Noticias() {

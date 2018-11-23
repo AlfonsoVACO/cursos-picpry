@@ -20,8 +20,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "alumno", catalog = "esccursos", schema = "")
@@ -78,36 +76,44 @@ public class Alumno implements Serializable {
     @Column(name = "keydes")
     private String keydes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    @JsonManagedReference
+    private List<Notasfinales> notasfinalesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    private List<Otrospagos> otrospagosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    private List<Registroquiz> registroquizList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Calificacion> calificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    @JsonManagedReference
+    private List<Proyecto> proyectoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Asistencia> asistenciaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    @JsonManagedReference
     private List<Comentarios> comentariosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    @JsonManagedReference
     private List<Resetopass> resetopassList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    private List<Recursotarea> recursotareaList;
     @JoinColumn(name = "idestado", referencedColumnName = "idestado")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Estados idestado;
+    @JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
+    @ManyToOne
+    private Grupo idgrupo;
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Municipios idmunicipio;
     @JoinColumn(name = "idplantel", referencedColumnName = "idplantel")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Plantel idplantel;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Roles idrol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    @JsonManagedReference
+    private List<Faltasclase> faltasclaseList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
     private List<Pagos> pagosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+    private List<Servicios> serviciosList;
 
     public Alumno() {
     }
@@ -299,6 +305,50 @@ public class Alumno implements Serializable {
 
     public void setPagosList(List<Pagos> pagosList) {
         this.pagosList = pagosList;
+    }
+    
+    @XmlTransient
+    public List<Otrospagos> getOtrospagosList() {
+        return otrospagosList;
+    }
+
+    public void setOtrospagosList(List<Otrospagos> otrospagosList) {
+        this.otrospagosList = otrospagosList;
+    }
+    
+    @XmlTransient
+    public List<Registroquiz> getRegistroquizList() {
+        return registroquizList;
+    }
+
+    public void setRegistroquizList(List<Registroquiz> registroquizList) {
+        this.registroquizList = registroquizList;
+    }
+    
+    public Grupo getIdgrupo() {
+        return idgrupo;
+    }
+
+    public void setIdgrupo(Grupo idgrupo) {
+        this.idgrupo = idgrupo;
+    }
+    
+    @XmlTransient
+    public List<Faltasclase> getFaltasclaseList() {
+        return faltasclaseList;
+    }
+
+    public void setFaltasclaseList(List<Faltasclase> faltasclaseList) {
+        this.faltasclaseList = faltasclaseList;
+    }
+    
+    @XmlTransient
+    public List<Servicios> getServiciosList() {
+        return serviciosList;
+    }
+
+    public void setServiciosList(List<Servicios> serviciosList) {
+        this.serviciosList = serviciosList;
     }
 
 	@Override

@@ -15,8 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "comentarios", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -37,11 +35,9 @@ public class Comentarios implements Serializable {
     private String comentario;
     @JoinColumn(name = "idalumno", referencedColumnName = "idalumno")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Alumno idalumno;
     @JoinColumn(name = "idcurso", referencedColumnName = "idcurso")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Cursos idcurso;
 
     public Comentarios() {

@@ -20,9 +20,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "plantel", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -57,31 +54,23 @@ public class Plantel implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplantel")
-    @JsonManagedReference
     private List<Cursos> cursosList;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idestado", referencedColumnName = "idestado")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Estados idestado;
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Municipios idmunicipio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplantel")
-    @JsonManagedReference
     private List<Contacto> contactoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplantel")
-    @JsonManagedReference
     private List<Alumno> alumnoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplantel")
-    @JsonManagedReference
     private List<Noticias> noticiasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplantel")
-    @JsonManagedReference
     private List<Config> configList;
 
     public Plantel() {

@@ -18,8 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "libros", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -57,7 +55,6 @@ public class Libros implements Serializable {
     private BigDecimal precio;
     @JoinColumn(name = "idcurso", referencedColumnName = "idcurso")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Cursos idcurso;
 
     public Libros() {

@@ -20,8 +20,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "administrador", catalog = "esccursos", schema = "")
@@ -69,23 +67,17 @@ public class Administrador implements Serializable {
     @Column(name = "img")
     private byte[] img;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadmin")
-    @JsonManagedReference
     private List<Cursos> cursosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadmin")
-    @JsonManagedReference
     private List<Plantel> plantelList;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Roles idrol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadmin")
-    @JsonManagedReference
     private List<Profesor> profesorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadmin")
-    @JsonManagedReference
     private List<Noticias> noticiasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadmin")
-    @JsonManagedReference
     private List<Config> configList;
 
     public Administrador() {

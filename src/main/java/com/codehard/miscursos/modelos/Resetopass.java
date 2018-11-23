@@ -17,8 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "resetopass", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -44,7 +42,6 @@ public class Resetopass implements Serializable {
     private Date creado;
     @JoinColumn(name = "idalumno", referencedColumnName = "idalumno")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Alumno idalumno;
 
     public Resetopass() {

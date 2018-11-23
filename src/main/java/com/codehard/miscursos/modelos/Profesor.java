@@ -23,9 +23,6 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "profesor", catalog = "esccursos", schema = "")
 @XmlRootElement
@@ -77,15 +74,16 @@ public class Profesor implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecharegistro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")
-    @JsonManagedReference
+    private List<Proyecto> proyectoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")
     private List<CursoProfesor> cursoProfesorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")
+    private List<Grupoprofe> grupoprofeList;
     @JoinColumn(name = "idadmin", referencedColumnName = "idadmin")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Administrador idadmin;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Roles idrol;
 
     public Profesor() {
@@ -188,12 +186,30 @@ public class Profesor implements Serializable {
     }
 
     @XmlTransient
+    public List<Proyecto> getProyectoList() {
+        return proyectoList;
+    }
+
+    public void setProyectoList(List<Proyecto> proyectoList) {
+        this.proyectoList = proyectoList;
+    }
+
+    @XmlTransient
     public List<CursoProfesor> getCursoProfesorList() {
         return cursoProfesorList;
     }
 
     public void setCursoProfesorList(List<CursoProfesor> cursoProfesorList) {
         this.cursoProfesorList = cursoProfesorList;
+    }
+
+    @XmlTransient
+    public List<Grupoprofe> getGrupoprofeList() {
+        return grupoprofeList;
+    }
+
+    public void setGrupoprofeList(List<Grupoprofe> grupoprofeList) {
+        this.grupoprofeList = grupoprofeList;
     }
 
     public Administrador getIdadmin() {

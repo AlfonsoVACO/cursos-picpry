@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.codehard.miscursos.modelos.Alumno;
@@ -34,5 +35,10 @@ public class AlumnoServiceImp {
 
 	public void deleteAlumno(Integer id) {
 		alumnoRepository.deleteById(id);
+	}
+	
+	public Alumno getAlumnoByCriteria(Example<Alumno> example) {
+		Optional<Alumno> isNull = alumnoRepository.findOne(example);
+		return isNull.isPresent() ? isNull.get() : new Alumno();
 	}
 }
